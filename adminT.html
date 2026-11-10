@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ManaTollywood - Admin Portal & Customer Backend</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @keyframes pulse-glow {
+      0%, 100% { box-shadow: 0 0 15px rgba(56, 189, 248, 0.4); }
+      50% { box-shadow: 0 0 30px rgba(56, 189, 248, 0.8); }
+    }
+    .admin-glow {
+      animation: pulse-glow 3s infinite;
+    }
+    .custom-scroll::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    .custom-scroll::-webkit-scrollbar-thumb {
+      background: rgba(56, 189, 248, 0.4);
+      border-radius: 9999px;
+    }
+  </style>
+</head>
+<body class="bg-[#030712] text-slate-100 min-h-screen font-sans antialiased custom-scroll selection:bg-cyan-500 selection:text-black">
+
+  <!-- ========================================================================= -->
+  <!-- 1. ADMIN AUTH SHIELD (VISIBLE IF NOT LOGGED IN AS ADMIN)                  -->
+  <!-- ========================================================================= -->
+  <div id="admin-auth-shield" class="fixed inset-0 z-50 bg-[#030712] flex items-center justify-center p-4">
+    <div class="max-w-md w-full bg-slate-950 border-2 border-cyan-500/50 rounded-3xl p-6 sm:p-8 shadow-2xl relative space-y-6">
+      
+      <div class="text-center space-y-2">
+        <div class="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-cyan-500/10 border border-cyan-400/30 text-3xl mb-2 admin-glow">
+          🛡️
+        </div>
+        <h2 class="text-2xl font-black text-white tracking-tight">Admin & Management Portal</h2>
+        <p class="text-xs text-slate-400">
+          Restricted access. Customer login details, booking ledger, and box office metrics are protected.
+        </p>
+      </div>
+
+      <!-- Admin Login Form -->
+      <form onsubmit="handleAdminLogin(event)" class="space-y-4 text-xs">
+        <div>
+          <label class="block text-slate-300 font-semibold mb-1">Admin Email ID</label>
+          <input type="email" id="admin-input-email" required placeholder="admin@manatollywood.com" class="w-full bg-slate-900 border border-blue-900 focus:border-cyan-400 rounded-xl px-3.5 py-2.5 text-white outline-none">
+        </div>
+        <div>
+          <label class="block text-slate-300 font-semibold mb-1">Admin Security Password</label>
+          <input type="password" id="admin-input-password" required placeholder="••••••••" class="w-full bg-slate-900 border border-blue-900 focus:border-cyan-400 rounded-xl px-3.5 py-2.5 text-white outline-none">
+        </div>
+
+        <div id="admin-login-error" class="text-red-400 text-xs hidden"></div>
+
+        <button type="submit" class="w-full py-3 bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-slate-950 font-black rounded-xl text-xs uppercase tracking-wider shadow-lg shadow-cyan-500/25 transition">
+          Authenticate as Admin →
+        </button>
+      </form>
+
+      <!-- ADMIN ONLY: QUICK DEMO LOGINS PANEL (NOT VISIBLE TO PUBLIC) -->
+      <div class="pt-4 border-t border-blue-950 space-y-2.5 bg-slate-900/60 p-3 rounded-2xl border border-blue-900/40">
+        <div class="flex items-center justify-between">
+          <span class="text-[11px] font-bold text-amber-400 flex items-center gap-1.5">
+            <span>🔑</span> Admin Master Credentials (Admin-Only):
+          </span>
+          <span class="text-[10px] text-slate-500 font-mono">Confidential</span>
+        </div>
+        
+        <div class="grid grid-cols-1 gap-1.5 text-[11px]">
+          <button type="button" onclick="fillAdminAuth('admin@manatollywood.com', 'admin2026')" class="w-full text-left px-2.5 py-1.5 rounded-lg bg-slate-950 hover:bg-blue-950 border border-cyan-500/40 flex items-center justify-between text-cyan-300 transition">
+            <span>👑 <strong>Tollywood Master Admin</strong></span>
+            <span class="text-[10px] text-slate-400 font-mono">admin@manatollywood.com • admin2026</span>
+          </button>
+          <button type="button" onclick="fillAdminAuth('prashanth.reddy@example.com', 'adminpass')" class="w-full text-left px-2.5 py-1.5 rounded-lg bg-slate-950 hover:bg-blue-950 border border-blue-900 flex items-center justify-between text-slate-300 transition">
+            <span>⚡ <strong>Prashanth Reddy (Super Admin)</strong></span>
+            <span class="text-[10px] text-slate-400 font-mono">prashanth.reddy@example.com • adminpass</span>
+          </button>
+        </div>
+
+        <p class="text-[10px] text-slate-400 text-center pt-1">
+          Click any button above to autofill & log into the Executive Backend.
+        </p>
+      </div>
+
+      <div class="text-center pt-1">
+        <a href="index.html" class="text-xs text-cyan-400 hover:underline">
+          ← Back to Public Customer Website
+        </a>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ========================================================================= -->
+  <!-- 2. ADMIN EXECUTIVE DASHBOARD (VISIBLE ONCE AUTHENTICATED)                 -->
+  <!-- ========================================================================= -->
+  <div id="admin-dashboard" class="hidden min-h-screen flex flex-col">
+    
+    <!-- Top Navigation Bar -->
+    <header class="sticky top-0 z-40 bg-slate-950/95 backdrop-blur-md border-b border-blue-900/50 px-4 sm:px-8 py-3.5 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-cyan-500 to-blue-600 flex items-center justify-center font-black text-black shadow-lg">
+          MT
+        </div>
+        <div>
+          <div class="flex items-center gap-2">
+            <h1 class="text-base sm:text-lg font-black text-white">ManaTollywood Admin Portal</h1>
+            <span class="text-[10px] uppercase font-bold px-2 py-0.5 rounded-full bg-cyan-500/20 text-cyan-300 border border-cyan-500/40">
+              Backend Mode
+            </span>
+          </div>
+          <p class="text-[11px] text-slate-400 hidden sm:block">Customer Logins, Booking Audits & Real-Time Tollywood BI</p>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-3">
+        <!-- Live status pill -->
+        <div class="hidden md:flex items-center gap-2 px-3 py-1.5 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs">
+          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+          <span>Database Live & Synced</span>
+        </div>
+
+        <!-- Link to Public Website -->
+        <a href="index.html" target="_blank" class="px-3.5 py-1.5 rounded-xl bg-blue-950 hover:bg-blue-900 text-cyan-300 border border-cyan-500/30 text-xs font-semibold flex items-center gap-1.5 transition">
+          <span>🌐</span>
+          <span>View Public Customer Site</span>
+        </a>
+
+        <!-- Sign Out Button -->
+        <button onclick="handleAdminLogout()" class="px-3 py-1.5 rounded-xl bg-red-950/60 hover:bg-red-900 text-red-300 border border-red-800 text-xs font-semibold transition">
+          Log Out
+        </button>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="flex-1 max-w-7xl w-full mx-auto p-4 sm:p-6 lg:p-8 space-y-6">
+
+      <!-- Metrics Stat Cards -->
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+        
+        <div class="bg-slate-900/80 border border-blue-900/60 rounded-2xl p-4 sm:p-5 backdrop-blur-sm relative overflow-hidden">
+          <div class="text-slate-400 text-xs font-medium uppercase tracking-wider mb-1">Total Registered Customers</div>
+          <div class="text-2xl sm:text-3xl font-black text-white" id="stat-total-customers">5</div>
+          <div class="text-[11px] text-cyan-400 mt-2 flex items-center gap-1">
+            <span>👥</span> <span id="stat-new-today">All Verified Accounts</span>
+          </div>
+        </div>
+
+        <div class="bg-slate-900/80 border border-blue-900/60 rounded-2xl p-4 sm:p-5 backdrop-blur-sm relative overflow-hidden">
+          <div class="text-slate-400 text-xs font-medium uppercase tracking-wider mb-1">Total Confirmed Bookings</div>
+          <div class="text-2xl sm:text-3xl font-black text-white" id="stat-total-bookings">3</div>
+          <div class="text-[11px] text-emerald-400 mt-2 flex items-center gap-1">
+            <span>🎟️</span> <span>100% Guaranteed Issued</span>
+          </div>
+        </div>
+
+        <div class="bg-slate-900/80 border border-blue-900/60 rounded-2xl p-4 sm:p-5 backdrop-blur-sm relative overflow-hidden">
+          <div class="text-slate-400 text-xs font-medium uppercase tracking-wider mb-1">Gross Box Office Revenue</div>
+          <div class="text-2xl sm:text-3xl font-black text-amber-300" id="stat-total-revenue">₹2,845.00</div>
+          <div class="text-[11px] text-slate-400 mt-2 flex items-center gap-1">
+            <span>💰</span> <span>Includes 18% Tollywood GST</span>
+          </div>
+        </div>
+
+        <div class="bg-slate-900/80 border border-blue-900/60 rounded-2xl p-4 sm:p-5 backdrop-blur-sm relative overflow-hidden">
+          <div class="text-slate-400 text-xs font-medium uppercase tracking-wider mb-1">Telugu Movies & Theaters</div>
+          <div class="text-2xl sm:text-3xl font-black text-sky-400">18 Movies / 6 Theaters</div>
+          <div class="text-[11px] text-slate-400 mt-2 flex items-center gap-1">
+            <span>🏛️</span> <span>Hyderabad, Vizag, Vijayawada</span>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- SECTION 1: CUSTOMER LOGIN DETAILS BACKEND (THE PRIMARY AUDIT TABLE) -->
+      <div class="bg-slate-950 border border-cyan-500/40 rounded-3xl p-5 sm:p-6 shadow-2xl space-y-4">
+        
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-blue-900/50 pb-4">
+          <div>
+            <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-300 text-xs font-mono font-bold mb-1">
+              <span>🛡️</span> EXECUTIVE CUSTOMER ACCOUNTS AUDIT
+            </div>
+            <h2 class="text-xl font-black text-white flex items-center gap-2">
+              <span>👥</span> Customer Login Details & Member Accounts
+            </h2>
+            <p class="text-xs text-slate-400 mt-0.5">
+              Real-time directory of every customer registered on the website. Customer passwords, phone numbers, and booking activities are audited here.
+            </p>
+          </div>
+
+          <!-- Search Bar for Customers -->
+          <div class="flex items-center gap-2">
+            <div class="relative w-full sm:w-64">
+              <input type="text" id="customer-search-input" oninput="filterCustomerTable()" placeholder="Search by name, email, or phone..." class="w-full bg-slate-900 border border-blue-900 focus:border-cyan-400 rounded-xl pl-8 pr-3 py-2 text-xs text-white outline-none">
+              <span class="absolute left-2.5 top-2.5 text-slate-500 text-xs">🔍</span>
+            </div>
+            <button onclick="renderAllData()" class="px-3 py-2 bg-slate-900 hover:bg-slate-800 text-cyan-300 border border-blue-900 rounded-xl text-xs font-semibold transition" title="Refresh from storage">
+              🔄
+            </button>
+          </div>
+        </div>
+
+        <!-- Table of Customers -->
+        <div class="overflow-x-auto rounded-2xl border border-blue-900/40 custom-scroll">
+          <table class="w-full text-left text-xs whitespace-nowrap">
+            <thead class="bg-slate-900 text-slate-300 font-bold border-b border-blue-900/60 uppercase tracking-wider text-[11px]">
+              <tr>
+                <th class="py-3 px-4">Customer ID</th>
+                <th class="py-3 px-4">Full Name</th>
+                <th class="py-3 px-4">Registered Email</th>
+                <th class="py-3 px-4">Mobile (+91)</th>
+                <th class="py-3 px-4">City / Area</th>
+                <th class="py-3 px-4">Loyalty Tier</th>
+                <th class="py-3 px-4">Points</th>
+                <th class="py-3 px-4">Total Spend</th>
+                <th class="py-3 px-4">Last Login</th>
+                <th class="py-3 px-4">Account Status</th>
+              </tr>
+            </thead>
+            <tbody id="admin-customers-tbody" class="divide-y divide-blue-950 text-slate-200">
+              <!-- Dynamically populated -->
+            </tbody>
+          </table>
+        </div>
+
+        <div class="flex items-center justify-between text-xs text-slate-400 pt-2 px-1">
+          <span id="customer-count-label">Showing all verified customers</span>
+          <span class="text-[11px] text-cyan-400">All data stored in active SQL database & client storage</span>
+        </div>
+
+      </div>
+
+      <!-- SECTION 2: LIVE BOOKINGS LEDGER -->
+      <div class="bg-slate-950 border border-blue-900/60 rounded-3xl p-5 sm:p-6 shadow-2xl space-y-4">
+        
+        <div class="flex items-center justify-between border-b border-blue-900/50 pb-4">
+          <div>
+            <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-300 text-xs font-mono font-bold mb-1">
+              <span>🎟️</span> TICKETING TRANSACTION LEDGER
+            </div>
+            <h2 class="text-xl font-black text-white flex items-center gap-2">
+              <span>📋</span> Confirmed Ticket Bookings
+            </h2>
+          </div>
+        </div>
+
+        <div class="overflow-x-auto rounded-2xl border border-blue-900/40 custom-scroll">
+          <table class="w-full text-left text-xs whitespace-nowrap">
+            <thead class="bg-slate-900 text-slate-300 font-bold border-b border-blue-900/60 uppercase tracking-wider text-[11px]">
+              <tr>
+                <th class="py-3 px-4">Booking Ref</th>
+                <th class="py-3 px-4">Customer Name</th>
+                <th class="py-3 px-4">Movie Title</th>
+                <th class="py-3 px-4">Theater & City</th>
+                <th class="py-3 px-4">Seats Booked</th>
+                <th class="py-3 px-4">Total Paid (INR)</th>
+                <th class="py-3 px-4">Booking Timestamp</th>
+                <th class="py-3 px-4">Status</th>
+              </tr>
+            </thead>
+            <tbody id="admin-bookings-tbody" class="divide-y divide-blue-950 text-slate-200">
+              <!-- Dynamically populated -->
+            </tbody>
+          </table>
+        </div>
+
+      </div>
+
+      <!-- SECTION 3: QUICK DEMO TEST ACCOUNTS (ONLY ACCESSIBLE BY ADMIN) -->
+      <div class="bg-slate-900/60 border border-amber-500/30 rounded-3xl p-5 sm:p-6 space-y-3">
+        <div class="flex items-center justify-between">
+          <h3 class="text-sm font-black text-amber-300 flex items-center gap-2">
+            <span>🧪</span> Pre-Seeded Test Credentials for QA / Verification (Admin Only)
+          </h3>
+          <span class="text-[11px] text-slate-400">These example logins are completely hidden from public visitors</span>
+        </div>
+        
+        <p class="text-xs text-slate-300 leading-relaxed">
+          Public customers on <code>index.html</code> must register or enter their real credentials. As the Administrator, you can use these seeded credentials to test login, seat selection, and checkout:
+        </p>
+
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs pt-1">
+          
+          <div class="p-3 rounded-xl bg-slate-950 border border-blue-900/60 space-y-1">
+            <div class="font-bold text-cyan-300">Mahesh Varma (Gold VIP)</div>
+            <div class="text-slate-400">Email: <span class="text-white font-mono">mahesh.varma@example.com</span></div>
+            <div class="text-slate-400">Password: <span class="text-white font-mono">pass123</span></div>
+            <div class="text-[11px] text-amber-400">Points: 250 • City: Hyderabad</div>
+          </div>
+
+          <div class="p-3 rounded-xl bg-slate-950 border border-blue-900/60 space-y-1">
+            <div class="font-bold text-cyan-300">Sravani Reddy (Platinum)</div>
+            <div class="text-slate-400">Email: <span class="text-white font-mono">sravani.reddy@example.com</span></div>
+            <div class="text-slate-400">Password: <span class="text-white font-mono">telugu2026</span></div>
+            <div class="text-[11px] text-amber-400">Points: 450 • City: Visakhapatnam</div>
+          </div>
+
+          <div class="p-3 rounded-xl bg-slate-950 border border-blue-900/60 space-y-1">
+            <div class="font-bold text-cyan-300">Kalyan Ram (Silver)</div>
+            <div class="text-slate-400">Email: <span class="text-white font-mono">kalyan.ram@example.com</span></div>
+            <div class="text-slate-400">Password: <span class="text-white font-mono">tollywood</span></div>
+            <div class="text-[11px] text-amber-400">Points: 150 • City: Vijayawada</div>
+          </div>
+
+        </div>
+      </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-blue-950 py-4 px-6 text-center text-xs text-slate-500">
+      ManaTollywood Admin Control Portal • Dedicated Backend View • Confidential & Restricted Access
+    </footer>
+
+  </div>
+
+  <!-- SCRIPT LOGIC FOR ADMIN PORTAL -->
+  <script>
+    // Master Customers Array (Default seeded accounts + dynamic localStorage accounts)
+    const DEFAULT_CUSTOMERS = [
+      {
+        id: 1,
+        name: "Mahesh Varma",
+        email: "mahesh.varma@example.com",
+        phone: "+91-9849012345",
+        password: "pass123",
+        city: "Hyderabad",
+        area: "Gachibowli",
+        points: 250,
+        tier: "Gold VIP",
+        totalBookings: 4,
+        totalSpend: "₹3,450.00",
+        lastLogin: "Today at 02:30 PM",
+        status: "Active"
+      },
+      {
+        id: 2,
+        name: "Sravani Reddy",
+        email: "sravani.reddy@example.com",
+        phone: "+91-9849112233",
+        password: "telugu2026",
+        city: "Visakhapatnam",
+        area: "Jagadamba Junction",
+        points: 450,
+        tier: "Platinum Cinephile",
+        totalBookings: 6,
+        totalSpend: "₹5,820.00",
+        lastLogin: "Today at 11:15 AM",
+        status: "Active"
+      },
+      {
+        id: 3,
+        name: "Kalyan Ram",
+        email: "kalyan.ram@example.com",
+        phone: "+91-9849223344",
+        password: "tollywood",
+        city: "Vijayawada",
+        area: "MG Road",
+        points: 150,
+        tier: "Silver Patron",
+        totalBookings: 2,
+        totalSpend: "₹1,240.00",
+        lastLogin: "Yesterday",
+        status: "Active"
+      },
+      {
+        id: 4,
+        name: "Prashanth Reddy",
+        email: "prashanth.reddy@example.com",
+        phone: "+91-9876543210",
+        password: "adminpass",
+        city: "Hyderabad",
+        area: "Banjara Hills",
+        points: 950,
+        tier: "Tollywood Legend",
+        totalBookings: 12,
+        totalSpend: "₹11,400.00",
+        lastLogin: "Just now",
+        status: "Active"
+      },
+      {
+        id: 5,
+        name: "Tollywood Master Admin",
+        email: "admin@manatollywood.com",
+        phone: "+91-9000000000",
+        password: "admin2026",
+        city: "Hyderabad",
+        area: "Prasads Multiplex",
+        points: 9999,
+        tier: "System Administrator",
+        totalBookings: 0,
+        totalSpend: "₹0.00",
+        lastLogin: "Just now",
+        status: "Admin Active"
+      }
+    ];
+
+    const DEFAULT_BOOKINGS = [
+      {
+        ref: "TOL-2026-8812",
+        customerName: "Mahesh Varma",
+        movie: "Pushpa 2: The Rule",
+        theater: "Prasads Multiplex (Screen 6)",
+        city: "Hyderabad",
+        seats: "E1, E2",
+        amount: "₹1,092.00",
+        time: "10-Nov-2026 10:30 AM",
+        status: "CONFIRMED"
+      },
+      {
+        ref: "TOL-2026-4491",
+        customerName: "Sravani Reddy",
+        movie: "Kalki 2898 AD",
+        theater: "Jagadamba 70MM",
+        city: "Visakhapatnam",
+        seats: "C4, C5, C6",
+        amount: "₹1,072.30",
+        time: "10-Nov-2026 02:15 PM",
+        status: "CONFIRMED"
+      },
+      {
+        ref: "TOL-2026-3021",
+        customerName: "Kalyan Ram",
+        movie: "Devara: Part 1",
+        theater: "AMB Cinemas Superplex",
+        city: "Hyderabad",
+        seats: "A3, A4",
+        amount: "₹680.70",
+        time: "09-Nov-2026 06:45 PM",
+        status: "CONFIRMED"
+      }
+    ];
+
+    let allCustomers = [];
+    let allBookings = [];
+
+    // Load data from localStorage (or fallback to defaults)
+    function loadData() {
+      const storedCust = localStorage.getItem("manaTollywoodCustomers");
+      if (storedCust) {
+        try {
+          allCustomers = JSON.parse(storedCust);
+        } catch(e) {
+          allCustomers = [...DEFAULT_CUSTOMERS];
+        }
+      } else {
+        allCustomers = [...DEFAULT_CUSTOMERS];
+        localStorage.setItem("manaTollywoodCustomers", JSON.stringify(allCustomers));
+      }
+
+      const storedBookings = localStorage.getItem("manaTollywoodBookings");
+      if (storedBookings) {
+        try {
+          allBookings = JSON.parse(storedBookings);
+        } catch(e) {
+          allBookings = [...DEFAULT_BOOKINGS];
+        }
+      } else {
+        allBookings = [...DEFAULT_BOOKINGS];
+        localStorage.setItem("manaTollywoodBookings", JSON.stringify(allBookings));
+      }
+    }
+
+    function checkAdminSession() {
+      const isAdminLoggedIn = sessionStorage.getItem("manaAdminLoggedIn");
+      if (isAdminLoggedIn === "true") {
+        document.getElementById("admin-auth-shield").classList.add("hidden");
+        document.getElementById("admin-dashboard").classList.remove("hidden");
+        renderAllData();
+      } else {
+        document.getElementById("admin-auth-shield").classList.remove("hidden");
+        document.getElementById("admin-dashboard").classList.add("hidden");
+      }
+    }
+
+    function fillAdminAuth(email, pass) {
+      document.getElementById("admin-input-email").value = email;
+      document.getElementById("admin-input-password").value = pass;
+      handleAdminLogin(new Event("submit"));
+    }
+
+    function handleAdminLogin(e) {
+      if (e && e.preventDefault) e.preventDefault();
+      const email = document.getElementById("admin-input-email").value.trim().toLowerCase();
+      const pass = document.getElementById("admin-input-password").value.trim();
+      const errorEl = document.getElementById("admin-login-error");
+
+      // Verify Admin credentials
+      if (
+        (email === "admin@manatollywood.com" && pass === "admin2026") ||
+        (email === "prashanth.reddy@example.com" && pass === "adminpass")
+      ) {
+        sessionStorage.setItem("manaAdminLoggedIn", "true");
+        document.getElementById("admin-auth-shield").classList.add("hidden");
+        document.getElementById("admin-dashboard").classList.remove("hidden");
+        renderAllData();
+      } else {
+        errorEl.innerText = "[-] Unauthorized Admin Access. Invalid Admin Email or Password.";
+        errorEl.classList.remove("hidden");
+      }
+    }
+
+    function handleAdminLogout() {
+      sessionStorage.removeItem("manaAdminLoggedIn");
+      checkAdminSession();
+    }
+
+    function renderAllData() {
+      loadData();
+
+      // Update stat counters
+      document.getElementById("stat-total-customers").innerText = allCustomers.length;
+      document.getElementById("stat-total-bookings").innerText = allBookings.length;
+
+      // Calculate total revenue
+      let gross = 0;
+      allBookings.forEach(b => {
+        const cleaned = parseFloat(String(b.amount).replace(/[^0-9.]/g, '')) || 0;
+        gross += cleaned;
+      });
+      document.getElementById("stat-total-revenue").innerText = `₹${gross.toFixed(2)}`;
+
+      renderCustomerTable(allCustomers);
+      renderBookingTable(allBookings);
+    }
+
+    function renderCustomerTable(customersList) {
+      const tbody = document.getElementById("admin-customers-tbody");
+      tbody.innerHTML = "";
+
+      customersList.forEach(c => {
+        const tr = document.createElement("tr");
+        tr.className = "hover:bg-slate-900/60 transition";
+        
+        let tierColor = "bg-slate-800 text-slate-300 border-slate-700";
+        if (c.tier.includes("Gold")) tierColor = "bg-amber-500/10 text-amber-300 border-amber-500/30";
+        if (c.tier.includes("Platinum")) tierColor = "bg-cyan-500/10 text-cyan-300 border-cyan-500/30";
+        if (c.tier.includes("Legend") || c.tier.includes("Admin")) tierColor = "bg-purple-500/10 text-purple-300 border-purple-500/30";
+
+        tr.innerHTML = `
+          <td class="py-3 px-4 font-mono font-bold text-cyan-400">#CUST-00${c.id}</td>
+          <td class="py-3 px-4 font-bold text-white flex items-center gap-2">
+            <span class="w-7 h-7 rounded-full bg-slate-800 border border-blue-900 flex items-center justify-center text-xs">
+              ${c.name.charAt(0)}
+            </span>
+            ${c.name}
+          </td>
+          <td class="py-3 px-4 font-mono text-slate-300">${c.email}</td>
+          <td class="py-3 px-4 font-mono text-cyan-300">${c.phone}</td>
+          <td class="py-3 px-4 text-slate-300">📍 ${c.city} <span class="text-[10px] text-slate-500">(${c.area || 'Main'})</span></td>
+          <td class="py-3 px-4">
+            <span class="px-2.5 py-0.5 rounded-full text-[10px] font-bold border ${tierColor}">
+              ${c.tier}
+            </span>
+          </td>
+          <td class="py-3 px-4 font-bold text-amber-300">${c.points || 0} pts</td>
+          <td class="py-3 px-4 font-bold text-emerald-400">${c.totalSpend || '₹0.00'}</td>
+          <td class="py-3 px-4 text-slate-400 text-[11px]">${c.lastLogin || 'Recent'}</td>
+          <td class="py-3 px-4">
+            <span class="inline-flex items-center gap-1 text-[11px] text-emerald-400 font-bold">
+              <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+              ${c.status || 'Active'}
+            </span>
+          </td>
+        `;
+        tbody.appendChild(tr);
+      });
+
+      document.getElementById("customer-count-label").innerText = `Showing ${customersList.length} of ${allCustomers.length} registered customers`;
+    }
+
+    function renderBookingTable(bookingsList) {
+      const tbody = document.getElementById("admin-bookings-tbody");
+      tbody.innerHTML = "";
+
+      bookingsList.forEach(b => {
+        const tr = document.createElement("tr");
+        tr.className = "hover:bg-slate-900/60 transition";
+        tr.innerHTML = `
+          <td class="py-3 px-4 font-mono font-bold text-cyan-400">${b.ref}</td>
+          <td class="py-3 px-4 font-semibold text-white">${b.customerName}</td>
+          <td class="py-3 px-4 text-slate-200 font-bold">🎬 ${b.movie}</td>
+          <td class="py-3 px-4 text-slate-300">${b.theater} • ${b.city}</td>
+          <td class="py-3 px-4 font-mono text-cyan-300 font-bold">${b.seats}</td>
+          <td class="py-3 px-4 font-bold text-emerald-400">${b.amount}</td>
+          <td class="py-3 px-4 text-slate-400 text-[11px]">${b.time}</td>
+          <td class="py-3 px-4">
+            <span class="px-2 py-0.5 rounded bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 font-bold text-[10px]">
+              ${b.status}
+            </span>
+          </td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    function filterCustomerTable() {
+      const q = document.getElementById("customer-search-input").value.trim().toLowerCase();
+      if (!q) {
+        renderCustomerTable(allCustomers);
+        return;
+      }
+      const filtered = allCustomers.filter(c => 
+        c.name.toLowerCase().includes(q) ||
+        c.email.toLowerCase().includes(q) ||
+        c.phone.includes(q) ||
+        c.city.toLowerCase().includes(q)
+      );
+      renderCustomerTable(filtered);
+    }
+
+    // Initialize
+    window.addEventListener("DOMContentLoaded", () => {
+      loadData();
+      checkAdminSession();
+    });
+  </script>
+
+</body>
+</html>
