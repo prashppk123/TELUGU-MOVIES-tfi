@@ -1,0 +1,2317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ManaTollywood - Cinema Hall Experience (Telugu Movie Ticket Booking)</title>
+  <script src="https://www.gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
+  <style>
+    @keyframes marquee {
+      0% { transform: translateX(100%); }
+      100% { transform: translateX(-100%); }
+    }
+    @keyframes projector-flicker {
+      0%, 100% { opacity: 0.95; }
+      50% { opacity: 0.8; }
+      75% { opacity: 1; }
+    }
+    @keyframes screen-glow-pulse {
+      0%, 100% {
+        box-shadow: 0 15px 55px rgba(56, 189, 248, 0.7), 0 0 35px rgba(37, 99, 235, 0.5);
+      }
+      50% {
+        box-shadow: 0 25px 80px rgba(56, 189, 248, 0.9), 0 0 50px rgba(14, 165, 233, 0.65);
+      }
+    }
+    .cinema-screen-visible {
+      border-bottom: 4px solid #38bdf8;
+      border-left: 2px solid rgba(56, 189, 248, 0.7);
+      border-right: 2px solid rgba(56, 189, 248, 0.7);
+      border-radius: 0 0 50px 50px / 0 0 25px 25px;
+      animation: screen-glow-pulse 4s ease-in-out infinite;
+    }
+    .screen-curve-blue {
+      border-top: 5px solid #38bdf8;
+      border-radius: 50% 50% 0 0 / 30px 30px 0 0;
+      box-shadow: 0 -15px 50px -5px rgba(56, 189, 248, 0.75), 0 -5px 20px rgba(37, 99, 235, 0.5);
+    }
+    .projector-beam {
+      background: radial-gradient(ellipse at top, rgba(56, 189, 248, 0.35) 0%, rgba(30, 58, 138, 0.16) 50%, transparent 80%);
+    }
+    .neon-text-blue {
+      text-shadow: 0 0 10px rgba(56, 189, 248, 0.85), 0 0 25px rgba(37, 99, 235, 0.6);
+    }
+    .cinema-card-glow:hover {
+      box-shadow: 0 15px 35px -5px rgba(2, 132, 199, 0.35), 0 0 25px rgba(56, 189, 248, 0.2);
+    }
+    .custom-scroll::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    .custom-scroll::-webkit-scrollbar-thumb {
+      background: rgba(56, 189, 248, 0.45);
+      border-radius: 9999px;
+    }
+    .theater-seat-bg {
+      background-image: radial-gradient(circle at center, rgba(56, 189, 248, 0.15) 0%, transparent 70%);
+    }
+  </style>
+</head>
+<body class="bg-[#030712] text-slate-100 min-h-screen font-sans antialiased selection:bg-cyan-500 selection:text-black custom-scroll relative">
+
+  <!-- ========================================================================= -->
+  <!-- HIGHLY VISIBLE CINEMA THEATRE SCREEN & AUDITORIUM CHAIRS IN BACKGROUND     -->
+  <!-- ========================================================================= -->
+  <div class="fixed inset-0 pointer-events-none z-0 overflow-hidden">
+    
+    <!-- Real Cinema Auditorium Interior with Rows of Chairs/Seats -->
+    <div class="absolute inset-0 bg-cover bg-center opacity-40 mix-blend-screen scale-105" 
+         style="background-image: url('https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?auto=format&fit=crop&w=2000&q=80'); filter: contrast(1.25) brightness(0.85) saturate(1.3);"></div>
+    
+    <!-- Prominently Visible Glowing 70MM Cinema Screen & Projector Cone in Background -->
+    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-5xl h-80 flex flex-col items-center justify-start pt-2 pointer-events-none">
+      
+      <!-- Overhead 3D Projector Light Beam Cone -->
+      <div class="absolute top-0 w-3/4 h-72 projector-beam opacity-95 animate-[projector-flicker_5s_ease-in-out_infinite] blur-xl rounded-b-[45%]"></div>
+      
+      <!-- Vivid 70MM Curved Cinema Hall Screen with Glowing Frame -->
+      <div class="relative w-11/12 max-w-4xl h-36 cinema-screen-visible bg-gradient-to-b from-cyan-300/30 via-blue-950/60 to-[#030712]/90 backdrop-blur-xs flex flex-col items-center justify-center p-3 shadow-2xl">
+        <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-cyan-950/80 border border-cyan-400/70 shadow-lg shadow-cyan-500/30">
+          <span class="w-2.5 h-2.5 rounded-full bg-cyan-400 animate-ping"></span>
+          <span class="text-[11px] font-black tracking-[0.25em] text-cyan-200 uppercase neon-text-blue">
+            70MM GIANT CURVED THEATRE SCREEN • DOLBY ATMOS
+          </span>
+        </div>
+        <p class="text-[10px] text-cyan-300/90 font-mono tracking-widest mt-1">
+          ✨ AUDITORIUM PROJECTION VIEW • NOW SCREENING TOLLYWOOD ✨
+        </p>
+      </div>
+
+      <!-- Luminous Light Reflection on the Front Rows of Auditorium Chairs -->
+      <div class="w-full max-w-3xl h-14 bg-gradient-to-b from-cyan-400/20 via-sky-600/10 to-transparent blur-md"></div>
+    </div>
+
+    <!-- Vignette Gradient Overlay: Center stays clear & illuminated, edges stay cinematic -->
+    <div class="absolute inset-0 bg-gradient-to-b from-[#030712]/75 via-[#030712]/70 to-[#020617]/95"></div>
+    <div class="absolute inset-0 bg-[radial-gradient(circle_at_50%_15%,transparent_40%,rgba(3,7,18,0.85)_85%)]"></div>
+    
+    <!-- Theater Floor & Auditorium Chairs Ambient Shadow at bottom -->
+    <div class="absolute bottom-0 inset-x-0 h-44 bg-gradient-to-t from-[#020617] via-[#030712]/75 to-transparent"></div>
+  </div>
+
+  <!-- Top Announcement Bar (Deep Cinema Blue & Slate Black) -->
+  <header class="bg-gradient-to-r from-blue-950/90 via-[#030712]/95 to-indigo-950/90 border-b border-blue-900/50 text-xs py-2 px-4 overflow-hidden relative z-10 backdrop-blur-sm">
+    <div class="whitespace-nowrap flex items-center gap-8 animate-[marquee_28s_linear_infinite]">
+      <span class="flex items-center gap-1.5 text-cyan-300 font-medium">
+        <span class="inline-block w-2 h-2 rounded-full bg-cyan-400 animate-ping"></span>
+        🎬 <strong>ManaTollywood Cinema Hall Desk</strong> • Experience Telugu Cinema on Giant 70MM Screen!
+      </span>
+      <span class="text-blue-500">•</span>
+      <span class="text-amber-300">🔱 <strong>Karthikeya 2</strong> & <strong>Sahasam</strong> Adventure Quests Now Screening</span>
+      <span class="text-blue-500">•</span>
+      <span class="text-emerald-300">🏉 <strong>Sye</strong> & <strong>Golconda High School</strong> Sports Drama Screenings</span>
+      <span class="text-blue-500">•</span>
+      <span class="text-pink-300">💌 <strong>Sita Ramam</strong> & <strong>Hi Nanna</strong> Romance Special</span>
+      <span class="text-blue-500">•</span>
+      <span class="text-cyan-400">🔒 Customer Authentication Required for Ticket Booking • View Backend Customer Details</span>
+    </div>
+  </header>
+
+  <!-- Cinema Navigation Bar (Midnight Blue / Obsidian Black with E-Commerce Customer Profile) -->
+  <nav class="sticky top-0 z-40 bg-[#030712]/92 backdrop-blur-md border-b border-blue-900/60 px-4 lg:px-8 py-3.5 flex items-center justify-between shadow-lg shadow-blue-950/30">
+    <div class="flex items-center gap-3 cursor-pointer" onclick="resetToHome()">
+      <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-cyan-500 via-blue-600 to-indigo-700 flex items-center justify-center text-xl shadow-lg shadow-cyan-500/25 border border-cyan-400/40">
+        🎬
+      </div>
+      <div>
+        <div class="flex items-center gap-2">
+          <span class="text-xl font-black tracking-wider bg-gradient-to-r from-cyan-400 via-sky-300 to-blue-500 bg-clip-text text-transparent neon-text-blue">
+            MANA TOLLYWOOD
+          </span>
+          <span class="text-[10px] uppercase font-bold tracking-widest px-2 py-0.5 rounded-full bg-cyan-500/10 text-cyan-400 border border-cyan-500/30">
+            Cinema Hall
+          </span>
+        </div>
+        <p class="text-[11px] text-slate-400 flex items-center gap-1">
+          <span>Hyderabad</span> • <span>Vizag</span> • <span>Vijayawada</span>
+          <span class="text-cyan-400 font-semibold" id="nav-active-location-badge">• All Areas</span>
+        </p>
+      </div>
+    </div>
+
+    <!-- City Selector Tabs -->
+    <div class="hidden lg:flex items-center bg-slate-900/90 border border-blue-900/50 rounded-xl p-1 gap-1 text-xs">
+      <button onclick="setCityFilter('All')" id="btn-city-All" class="city-btn px-3.5 py-1.5 rounded-lg font-semibold transition bg-cyan-500 text-slate-950 shadow-md shadow-cyan-500/25">
+        All Cities
+      </button>
+      <button onclick="setCityFilter('Hyderabad')" id="btn-city-Hyderabad" class="city-btn px-3.5 py-1.5 rounded-lg font-medium transition text-slate-300 hover:text-white hover:bg-blue-950/50">
+        Hyderabad (హైదరాబాద్)
+      </button>
+      <button onclick="setCityFilter('Visakhapatnam')" id="btn-city-Visakhapatnam" class="city-btn px-3.5 py-1.5 rounded-lg font-medium transition text-slate-300 hover:text-white hover:bg-blue-950/50">
+        Visakhapatnam (వైజాగ్)
+      </button>
+      <button onclick="setCityFilter('Vijayawada')" id="btn-city-Vijayawada" class="city-btn px-3.5 py-1.5 rounded-lg font-medium transition text-slate-300 hover:text-white hover:bg-blue-950/50">
+        Vijayawada (బెజవాడ)
+      </button>
+    </div>
+
+    <!-- Right Controls: Customer Auth State & Backend Admin -->
+    <div class="flex items-center gap-2">
+      
+      <!-- Backend Customer Audit Button -->
+      <button onclick="openCustomerBackendModal()" title="View Customer Logins & Account Audit" class="flex items-center gap-1.5 text-xs bg-slate-900/90 hover:bg-blue-950 text-cyan-300 border border-cyan-500/30 px-2.5 py-1.5 sm:px-3 sm:py-2 rounded-xl transition shadow">
+        <svg class="w-4 h-4 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+        <span class="font-medium hidden md:inline">Customer Accounts Backend</span>
+      </button>
+
+      <!-- Customer Auth Widget (Toggles Login vs Logged In Profile) -->
+      <div id="nav-auth-container" class="flex items-center">
+        <!-- Rendered by JS -->
+      </div>
+
+      <!-- My Ticket -->
+      <button onclick="openFindBookingModal()" class="flex items-center gap-1.5 text-xs bg-slate-900 hover:bg-slate-800 text-slate-200 border border-blue-900 px-3 py-2 rounded-xl transition">
+        <svg class="w-4 h-4 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 5v2m0 4v2m0 4v2M5 5a2 2 0 00-2 2v3a2 2 0 110 4v3a2 2 0 002 2h14a2 2 0 002-2v-3a2 2 0 110-4V7a2 2 0 00-2-2H5z"></path></svg>
+        <span class="hidden sm:inline">My Ticket</span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Hero Cinema Banner with Projector Flare, Visible Screen Indicator & Genre Filters -->
+  <div class="relative overflow-hidden bg-gradient-to-b from-blue-950/40 via-[#030712]/90 to-[#030712]/95 border-b border-blue-900/40 py-8 px-4 lg:px-12 backdrop-blur-sm">
+    <div class="absolute -top-24 -left-24 w-96 h-96 bg-blue-600/15 rounded-full blur-3xl pointer-events-none"></div>
+    <div class="absolute top-1/2 -right-24 w-96 h-96 bg-cyan-500/15 rounded-full blur-3xl pointer-events-none"></div>
+
+    <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-8 relative z-10">
+      <div class="max-w-2xl space-y-4">
+        
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 text-xs font-semibold">
+          <span class="w-2 h-2 rounded-full bg-cyan-400 animate-ping"></span>
+          TELUGU CINEMA AUDITORIUM PASS 2024-2026
+        </div>
+
+        <h1 class="text-3xl sm:text-5xl font-black tracking-tight text-white leading-tight">
+          Experience <span class="bg-gradient-to-r from-cyan-400 via-sky-300 to-blue-500 bg-clip-text text-transparent">Telugu Cinema</span> with Real Hall Ambiance.
+        </h1>
+        
+        <p class="text-slate-300 text-sm sm:text-base leading-relaxed">
+          Book seats in front of the illuminated <strong>70MM Theatre Screen</strong>. Featuring high-octane action, sports blockbusters, treasure hunt adventures, and beloved romance classics.
+        </p>
+
+        <!-- Customer Authentication Gate Banner -->
+        <div id="hero-auth-alert" class="p-3 rounded-xl bg-cyan-500/10 border border-cyan-400/30 flex items-center justify-between text-xs">
+          <div class="flex items-center gap-2">
+            <span class="text-cyan-400 font-bold">🔒 Member Booking System:</span>
+            <span class="text-slate-300" id="hero-auth-status-text">Log in to unlock instant seat reservations, loyalty reward coins, and official E-Tickets.</span>
+          </div>
+          <button onclick="openLoginModal()" id="hero-auth-btn" class="px-3 py-1 bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold rounded-lg transition shadow">
+            Sign In Now
+          </button>
+        </div>
+
+        <!-- Filter Controls (Area + All Genres: Sports, Adventure, Romance, Drama, Action) -->
+        <div class="bg-slate-950/80 border border-blue-900/60 rounded-2xl p-4 space-y-3.5 backdrop-blur-md shadow-lg">
+          
+          <!-- Area Filter Line -->
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+            <div class="flex items-center gap-2 text-xs font-bold text-cyan-300 uppercase tracking-wider">
+              <span>📍</span>
+              <span>Filter by Theater Hub / Area:</span>
+            </div>
+            
+            <div class="flex items-center gap-2">
+              <span class="text-[11px] text-slate-400">City:</span>
+              <select id="select-city-dropdown" onchange="setCityFilter(this.value)" class="bg-slate-900 text-cyan-300 border border-blue-900 text-xs rounded-lg px-2.5 py-1 focus:outline-none focus:border-cyan-400">
+                <option value="All">All Cities (Hyderabad, Vizag, Vijayawada)</option>
+                <option value="Hyderabad">Hyderabad</option>
+                <option value="Visakhapatnam">Visakhapatnam (Vizag)</option>
+                <option value="Vijayawada">Vijayawada (Bezawada)</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Dynamic Area Pills -->
+          <div class="flex flex-wrap items-center gap-2 text-xs" id="area-pills-container">
+            <!-- Rendered by JS -->
+          </div>
+
+          <!-- Genre Filter Pills with Sports, Adventure, Romance, Drama, Action, Sci-Fi -->
+          <div class="pt-2 border-t border-blue-950 space-y-2">
+            <div class="flex items-center justify-between">
+              <span class="text-slate-300 text-xs font-bold flex items-center gap-1.5">
+                <span>🎭</span> Genre Filter:
+              </span>
+              <span class="text-[11px] text-slate-400" id="genre-badge-count">Showing 18 Titles</span>
+            </div>
+
+            <div class="flex flex-wrap items-center gap-1.5 text-xs">
+              <button onclick="setGenreFilter('All')" class="genre-pill px-3 py-1 rounded-xl bg-cyan-500 text-slate-950 font-bold transition shadow" id="genre-All">
+                All (18)
+              </button>
+              <button onclick="setGenreFilter('Sports')" class="genre-pill px-3 py-1 rounded-xl bg-slate-900/90 hover:bg-emerald-950/50 text-emerald-300 border border-emerald-900/60 transition flex items-center gap-1" id="genre-Sports">
+                <span>🏉</span> Sports (స్పోర్ట్స్)
+              </button>
+              <button onclick="setGenreFilter('Adventure')" class="genre-pill px-3 py-1 rounded-xl bg-slate-900/90 hover:bg-amber-950/50 text-amber-300 border border-amber-900/60 transition flex items-center gap-1" id="genre-Adventure">
+                <span>🗺️</span> Adventure (అడ్వెంచర్)
+              </button>
+              <button onclick="setGenreFilter('Romance')" class="genre-pill px-3 py-1 rounded-xl bg-slate-900/90 hover:bg-pink-950/50 text-pink-300 border border-pink-900/60 transition flex items-center gap-1" id="genre-Romance">
+                <span>❤️</span> Romance (రొమాన్స్)
+              </button>
+              <button onclick="setGenreFilter('Drama')" class="genre-pill px-3 py-1 rounded-xl bg-slate-900/90 hover:bg-orange-950/50 text-orange-300 border border-orange-900/60 transition flex items-center gap-1" id="genre-Drama">
+                <span>🎭</span> Drama (డ్రామా)
+              </button>
+              <button onclick="setGenreFilter('Action')" class="genre-pill px-3 py-1 rounded-xl bg-slate-900/90 hover:bg-blue-950 text-slate-300 border border-blue-900/60 transition flex items-center gap-1" id="genre-Action">
+                <span>🪓</span> Action & Mass
+              </button>
+              <button onclick="setGenreFilter('Sci-Fi')" class="genre-pill px-3 py-1 rounded-xl bg-slate-900/90 hover:bg-blue-950 text-slate-300 border border-blue-900/60 transition flex items-center gap-1" id="genre-Sci-Fi">
+                <span>🏹</span> Sci-Fi & Myth
+              </button>
+              <button onclick="setGenreFilter('Period')" class="genre-pill px-3 py-1 rounded-xl bg-slate-900/90 hover:bg-blue-950 text-slate-300 border border-blue-900/60 transition flex items-center gap-1" id="genre-Period">
+                <span>👑</span> Period Epic
+              </button>
+            </div>
+          </div>
+
+          <!-- Quick Search Bar -->
+          <div class="pt-1">
+            <div class="relative w-full">
+              <input type="text" id="input-keyword-search" oninput="handleKeywordSearch(this.value)" placeholder="🔍 Search movie (e.g. Karthikeya 2, Sye, Sita Ramam, Jersey), theater, or actor..." class="w-full bg-slate-900 border border-blue-900/80 focus:border-cyan-400 rounded-xl px-3.5 py-2 text-xs text-white placeholder-slate-500 outline-none">
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- Featured Hot Premiere Spotlight -->
+      <div class="w-full md:w-80 bg-gradient-to-br from-slate-900/90 via-slate-950 to-blue-950/80 border border-cyan-500/40 rounded-3xl p-4 shadow-2xl relative group overflow-hidden cinema-card-glow backdrop-blur-md">
+        <div class="relative">
+          <div class="h-64 rounded-2xl overflow-hidden relative shadow-lg border border-blue-900/60">
+            <img src="https://upload.wikimedia.org/wikipedia/en/1/11/Pushpa_2-_The_Rule.jpg" 
+                 alt="Pushpa 2: The Rule Poster" 
+                 class="w-full h-full object-cover object-top group-hover:scale-105 transition duration-500">
+            <div class="absolute inset-0 bg-gradient-to-t from-[#030712] via-slate-950/30 to-transparent"></div>
+            <span class="absolute top-2.5 right-2.5 px-2.5 py-1 rounded-full text-[10px] font-black bg-cyan-500 text-slate-950 shadow-lg">
+              🔥 AUDI #1
+            </span>
+            <div class="absolute bottom-3 left-3 right-3">
+              <span class="text-[10px] text-cyan-400 font-bold uppercase tracking-wider">ALLU ARJUN • SUKUMAR</span>
+              <h3 class="text-xl font-black text-white leading-tight">Pushpa 2: The Rule</h3>
+            </div>
+          </div>
+          <div class="pt-3 flex items-center justify-between text-xs">
+            <span class="text-slate-400">Prasads PCX • 6 Shows Today</span>
+            <span class="text-cyan-400 font-bold">⭐ 8.9 / 10</span>
+          </div>
+          <button onclick="selectMovie(1)" class="mt-3 w-full py-2.5 bg-gradient-to-r from-cyan-500 via-sky-400 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-slate-950 font-black rounded-xl text-xs uppercase tracking-wider shadow-lg shadow-cyan-500/20 transition">
+            Book Pushpa 2 Tickets Now →
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Content Area -->
+  <main class="max-w-7xl mx-auto px-4 lg:px-8 py-8 space-y-12 relative z-10">
+
+    <!-- Step 1: Movies Section with Matched High-Res Posters, Genres & Area Tags -->
+    <section id="section-movies">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-6">
+        <div>
+          <h2 class="text-xl sm:text-2xl font-black text-white flex items-center gap-2">
+            <span>🎬</span> Now Showing Telugu Films & Blockbusters
+          </h2>
+          <p class="text-xs sm:text-sm text-slate-400" id="filter-status-desc">
+            Showing movies across all cities & theater areas. Select a film to view theater screens and reserve seats.
+          </p>
+        </div>
+        <div class="flex items-center gap-2">
+          <span class="text-xs px-3 py-1 rounded-full bg-blue-950/80 border border-cyan-500/30 text-cyan-400 font-mono" id="movies-count-badge">
+            18 Movies
+          </span>
+          <button onclick="resetFilters()" class="text-xs text-slate-400 hover:text-cyan-300 underline px-2 py-1">
+            Reset Filters
+          </button>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6" id="movies-grid">
+        <!-- Rendered by JS -->
+      </div>
+    </section>
+
+    <!-- Step 2: Showtimes & Theater Selection with Area Filters -->
+    <section id="section-shows" class="hidden scroll-mt-24">
+      <div class="bg-gradient-to-b from-slate-900/90 to-[#030712] border border-blue-900/70 rounded-3xl p-6 lg:p-8 shadow-2xl relative backdrop-blur-md">
+        
+        <!-- Selected Movie Summary Header -->
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-6 border-b border-blue-900/50 pb-6 mb-6">
+          <div class="flex items-center gap-5">
+            <div class="w-20 h-28 sm:w-24 sm:h-36 rounded-2xl overflow-hidden shadow-2xl border border-cyan-500/40 flex-shrink-0 bg-black">
+              <img id="selected-movie-poster-img" src="" alt="Selected Poster" class="w-full h-full object-cover">
+            </div>
+            <div>
+              <div class="flex items-center gap-2.5">
+                <h3 class="text-2xl sm:text-3xl font-black text-white" id="selected-movie-title">Pushpa 2: The Rule</h3>
+                <span class="text-[11px] font-bold px-2 py-0.5 rounded bg-blue-950 text-cyan-400 border border-cyan-500/30" id="selected-movie-cert">U/A</span>
+              </div>
+              <p class="text-xs sm:text-sm text-cyan-300 font-medium mt-1" id="selected-movie-actors">Allu Arjun • Directed by Sukumar</p>
+              <p class="text-xs text-slate-400 mt-1 italic" id="selected-movie-dialogue">"Wildfire kadhu, Pushparaj wildfire!"</p>
+            </div>
+          </div>
+          <button onclick="scrollToMovies()" class="self-start md:self-center text-xs text-slate-400 hover:text-white flex items-center gap-1.5 bg-slate-900 px-3.5 py-2 rounded-xl border border-blue-900/70 transition">
+            ← Change Movie
+          </button>
+        </div>
+
+        <!-- Area & Theater Filter Bar for this Movie -->
+        <div class="bg-black/40 border border-blue-900/50 rounded-2xl p-4 mb-6 space-y-3">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+            <h4 class="text-sm font-bold text-slate-200 uppercase tracking-wider flex items-center gap-2">
+              <span>🏛️</span> Choose Theater & Area for Screening:
+            </h4>
+            <span class="text-xs text-cyan-400 font-mono" id="shows-count-badge">Shows Available</span>
+          </div>
+
+          <!-- Quick Area Filter Chips for this Movie -->
+          <div class="flex flex-wrap items-center gap-1.5 text-xs" id="movie-show-area-pills">
+            <!-- Rendered by JS -->
+          </div>
+        </div>
+
+        <!-- Shows Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4" id="shows-list">
+          <!-- Rendered by JS -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Step 3: Curved Cinema Auditorium Seating Matrix with Theater Chairs & Screen Ambience -->
+    <section id="section-seating" class="hidden scroll-mt-24">
+      <div class="bg-gradient-to-b from-slate-900/90 to-[#020617] border border-cyan-500/30 rounded-3xl p-6 lg:p-8 shadow-2xl space-y-8 relative overflow-hidden backdrop-blur-md">
+        
+        <!-- Header Info -->
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-blue-900/50 pb-5">
+          <div>
+            <span class="text-[10px] font-bold tracking-widest uppercase text-cyan-400 bg-cyan-500/10 px-2.5 py-1 rounded-full border border-cyan-500/30">
+              Auditorium Seating • Select Your Seats
+            </span>
+            <h3 class="text-lg sm:text-xl font-black text-white mt-2" id="seat-hall-info">
+              Prasads Multiplex • Screen 6 (PCX Giant Screen)
+            </h3>
+            <p class="text-xs text-slate-400" id="seat-time-info">Today • 10:30 AM</p>
+          </div>
+          <div class="flex items-center gap-4 text-xs">
+            <div class="flex items-center gap-1.5">
+              <span class="w-3.5 h-3.5 rounded bg-slate-800 border border-blue-900"></span>
+              <span class="text-slate-400">Available</span>
+            </div>
+            <div class="flex items-center gap-1.5">
+              <span class="w-3.5 h-3.5 rounded bg-cyan-400 shadow shadow-cyan-400/60"></span>
+              <span class="text-cyan-300 font-semibold">Selected</span>
+            </div>
+            <div class="flex items-center gap-1.5">
+              <span class="w-3.5 h-3.5 rounded bg-red-950 border border-red-900 text-red-400 flex items-center justify-center font-bold text-[9px]">✕</span>
+              <span class="text-slate-400">Booked</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Cinema Screen Curve Visual (High Luminosity Blue Projector Beam Glow) -->
+        <div class="max-w-2xl mx-auto text-center pt-2">
+          <div class="screen-curve-blue h-14 w-full max-w-lg mx-auto bg-gradient-to-b from-cyan-300/35 via-blue-500/15 to-transparent flex items-center justify-center">
+            <span class="text-[11px] font-black uppercase tracking-widest text-cyan-200 neon-text-blue">
+              ⚡ 70MM 4K RGB LASER CURVED SCREEN ⚡
+            </span>
+          </div>
+          <p class="text-[11px] uppercase font-bold tracking-widest text-cyan-300/90 mt-2 neon-text-blue">
+            ✨ AUDITORIUM CHAIRS & SCREEN VIEW • ALL EYES THIS WAY ✨
+          </p>
+        </div>
+
+        <!-- Seat Grid Layout with Hall Chair Backdrop -->
+        <div class="max-w-xl mx-auto space-y-4 py-6 px-4 rounded-3xl bg-black/50 border border-blue-950/80 theater-seat-bg" id="seats-container">
+          <!-- Rendered by JS -->
+        </div>
+
+        <!-- Booking Summary & Checkout Drawer (Gated by Login) -->
+        <div class="bg-black/85 border border-blue-900/60 rounded-2xl p-5 max-w-2xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6 shadow-xl backdrop-blur-md">
+          <div class="space-y-1 w-full md:w-auto">
+            <div class="text-xs text-slate-400">Selected Seats: <strong class="text-cyan-300" id="summary-seats-text">None</strong></div>
+            <div class="text-xs text-slate-400">Base Fare: <span id="summary-base-fare">₹0.00</span> | GST (18%): <span id="summary-gst">₹0.00</span> | Fee: <span id="summary-fee">₹0.00</span></div>
+            <div class="text-lg font-black text-white">
+              Total Amount: <span class="text-cyan-400" id="summary-total-amount">₹0.00</span>
+            </div>
+          </div>
+
+          <button onclick="handleProceedToConfirmation()" id="btn-proceed-checkout" disabled class="w-full md:w-auto px-6 py-3 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 disabled:opacity-40 disabled:cursor-not-allowed hover:from-cyan-400 hover:to-blue-500 text-slate-950 font-black text-xs uppercase tracking-wider shadow-lg shadow-cyan-500/25 transition flex items-center justify-center gap-2">
+            <span id="btn-proceed-text">Proceed to Confirmation</span>
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+          </button>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ========================================================================= -->
+  <!-- 1. CUSTOMER LOGIN & REGISTRATION MODAL (E-COMMERCE AUTHENTICATION GATE)   -->
+  <!-- ========================================================================= -->
+  <div id="modal-auth" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-md hidden flex items-center justify-center p-4">
+    <div class="bg-slate-950 border border-cyan-500/50 rounded-3xl max-w-md w-full p-6 shadow-2xl relative space-y-5">
+      <button onclick="closeModal('modal-auth')" class="absolute top-4 right-4 text-slate-400 hover:text-white text-lg">✕</button>
+
+      <div class="border-b border-blue-900/50 pb-3">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 text-[11px] font-bold mb-2">
+          <span>🔒</span> ManaTollywood Member Authentication
+        </div>
+        <h3 class="text-xl font-black text-white" id="auth-modal-title">Sign In to Reserve Your Ticket</h3>
+        <p class="text-xs text-slate-400 mt-1" id="auth-modal-subtitle">
+          Tickets are issued to verified customer accounts with digital barcode QR access and loyalty reward points.
+        </p>
+      </div>
+
+      <!-- Auth Mode Tabs (Sign In vs Register) -->
+      <div class="grid grid-cols-2 p-1 bg-slate-900 border border-blue-900/60 rounded-xl text-xs text-center font-bold">
+        <button onclick="setAuthTab('login')" id="tab-auth-login" class="py-2 rounded-lg bg-cyan-500 text-slate-950 transition">
+          Sign In
+        </button>
+        <button onclick="setAuthTab('register')" id="tab-auth-register" class="py-2 rounded-lg text-slate-400 hover:text-white transition">
+          Create Account
+        </button>
+      </div>
+
+      <!-- Sign In Form -->
+      <form id="form-login" onsubmit="handleLoginSubmit(event)" class="space-y-3.5 text-xs">
+        <div>
+          <label class="block text-slate-300 font-medium mb-1">Registered Email *</label>
+          <input type="email" id="login-email" value="mahesh.varma@example.com" required placeholder="name@example.com" class="w-full bg-slate-900 border border-blue-900 focus:border-cyan-400 rounded-xl px-3 py-2 text-white outline-none">
+        </div>
+        <div>
+          <label class="block text-slate-300 font-medium mb-1">Password *</label>
+          <input type="password" id="login-password" value="pass123" required placeholder="••••••••" class="w-full bg-slate-900 border border-blue-900 focus:border-cyan-400 rounded-xl px-3 py-2 text-white outline-none">
+        </div>
+
+        <div id="login-error-msg" class="text-red-400 text-xs hidden"></div>
+
+        <button type="submit" class="w-full py-3 bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-slate-950 font-black rounded-xl text-xs uppercase tracking-wider shadow-lg shadow-cyan-500/25 transition">
+          Sign In & Continue Booking →
+        </button>
+
+        <!-- Quick 1-Click Demo Logins -->
+        <div class="pt-3 border-t border-blue-950 text-center space-y-2">
+          <span class="text-[11px] text-slate-400">Or use 1-click test credentials:</span>
+          <div class="flex flex-wrap justify-center gap-1.5">
+            <button type="button" onclick="fillQuickLogin('mahesh.varma@example.com', 'pass123')" class="px-2.5 py-1 rounded bg-slate-900 hover:bg-slate-800 text-[11px] text-cyan-300 border border-blue-900">
+              Mahesh Varma (Gold VIP)
+            </button>
+            <button type="button" onclick="fillQuickLogin('sravani.reddy@example.com', 'telugu2026')" class="px-2.5 py-1 rounded bg-slate-900 hover:bg-slate-800 text-[11px] text-cyan-300 border border-blue-900">
+              Sravani Reddy (Platinum)
+            </button>
+            <button type="button" onclick="fillQuickLogin('admin@manatollywood.com', 'admin2026')" class="px-2.5 py-1 rounded bg-slate-900 hover:bg-slate-800 text-[11px] text-amber-300 border border-amber-900">
+              Theater Admin
+            </button>
+          </div>
+        </div>
+      </form>
+
+      <!-- Register Form -->
+      <form id="form-register" onsubmit="handleRegisterSubmit(event)" class="space-y-3 text-xs hidden">
+        <div>
+          <label class="block text-slate-300 font-medium mb-1">Full Name *</label>
+          <input type="text" id="reg-name" required placeholder="e.g. Ramesh Chandra" class="w-full bg-slate-900 border border-blue-900 focus:border-cyan-400 rounded-xl px-3 py-2 text-white outline-none">
+        </div>
+        <div>
+          <label class="block text-slate-300 font-medium mb-1">Email ID *</label>
+          <input type="email" id="reg-email" required placeholder="ramesh@example.com" class="w-full bg-slate-900 border border-blue-900 focus:border-cyan-400 rounded-xl px-3 py-2 text-white outline-none">
+        </div>
+        <div class="grid grid-cols-2 gap-2">
+          <div>
+            <label class="block text-slate-300 font-medium mb-1">Mobile (+91) *</label>
+            <input type="tel" id="reg-phone" required placeholder="9849012345" class="w-full bg-slate-900 border border-blue-900 focus:border-cyan-400 rounded-xl px-3 py-2 text-white outline-none">
+          </div>
+          <div>
+            <label class="block text-slate-300 font-medium mb-1">Preferred City</label>
+            <select id="reg-city" class="w-full bg-slate-900 border border-blue-900 focus:border-cyan-400 rounded-xl px-2.5 py-2 text-white outline-none">
+              <option value="Hyderabad">Hyderabad</option>
+              <option value="Visakhapatnam">Visakhapatnam</option>
+              <option value="Vijayawada">Vijayawada</option>
+            </select>
+          </div>
+        </div>
+        <div>
+          <label class="block text-slate-300 font-medium mb-1">Choose Password *</label>
+          <input type="password" id="reg-password" required placeholder="••••••••" class="w-full bg-slate-900 border border-blue-900 focus:border-cyan-400 rounded-xl px-3 py-2 text-white outline-none">
+        </div>
+
+        <div id="register-error-msg" class="text-red-400 text-xs hidden"></div>
+
+        <button type="submit" class="w-full py-3 bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-slate-950 font-black rounded-xl text-xs uppercase tracking-wider shadow-lg shadow-cyan-500/25 transition">
+          Create Member Account (Get 150 Pts) →
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- ========================================================================= -->
+  <!-- 2. CUSTOMER LOGIN DETAILS BACKEND AUDIT MODAL (FOR ADMIN & VERIFICATION)  -->
+  <!-- ========================================================================= -->
+  <div id="modal-customers-backend" class="fixed inset-0 z-50 bg-black/90 backdrop-blur-md hidden flex items-center justify-center p-4">
+    <div class="bg-slate-950 border-2 border-cyan-500/50 rounded-3xl max-w-4xl w-full p-6 shadow-2xl relative space-y-5">
+      <button onclick="closeModal('modal-customers-backend')" class="absolute top-4 right-4 text-slate-400 hover:text-white text-lg">✕</button>
+
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-blue-900/50 pb-4">
+        <div>
+          <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-300 text-xs font-mono font-bold mb-1">
+            <span>🛡️</span> BACKEND CUSTOMER ACCOUNTS AUDIT TABLE
+          </div>
+          <h3 class="text-xl font-black text-white flex items-center gap-2">
+            <span>👥</span> Registered Customers & Login Credentials
+          </h3>
+          <p class="text-xs text-slate-400">
+            Real-time backend view from SQL table `Customers` and booking ledger.
+          </p>
+        </div>
+
+        <button onclick="refreshCustomerBackendList()" class="self-start sm:self-center px-3 py-1.5 bg-slate-900 hover:bg-slate-800 text-cyan-300 border border-blue-900 rounded-xl text-xs font-semibold flex items-center gap-1.5 transition">
+          <span>🔄</span> Refresh Data
+        </button>
+      </div>
+
+      <!-- Customer List Table -->
+      <div class="max-h-[60vh] overflow-y-auto custom-scroll border border-blue-900/60 rounded-2xl bg-black/40">
+        <table class="w-full text-left text-xs">
+          <thead class="bg-slate-900 text-slate-300 font-bold border-b border-blue-900">
+            <tr>
+              <th class="p-3">ID</th>
+              <th class="p-3">Customer Name</th>
+              <th class="p-3">Email & Phone</th>
+              <th class="p-3">City & Hub</th>
+              <th class="p-3">Tier & Points</th>
+              <th class="p-3">Login Password</th>
+              <th class="p-3">Last Login</th>
+              <th class="p-3 text-right">Action</th>
+            </tr>
+          </thead>
+          <tbody id="customers-backend-tbody" class="divide-y divide-blue-950 text-slate-200">
+            <!-- Rendered by JS -->
+          </tbody>
+        </table>
+      </div>
+
+      <div class="text-right text-[11px] text-slate-400">
+        💡 You can click <strong>"Login as User"</strong> on any row to instantly test checkout with that customer account!
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================================= -->
+  <!-- 3. CHECKOUT & TICKET CONFIRMATION MODAL                                    -->
+  <!-- ========================================================================= -->
+  <div id="modal-checkout" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-sm hidden flex items-center justify-center p-4">
+    <div class="bg-slate-950 border border-cyan-500/40 rounded-3xl max-w-md w-full p-6 shadow-2xl relative space-y-5">
+      <button onclick="closeModal('modal-checkout')" class="absolute top-4 right-4 text-slate-400 hover:text-white text-lg">✕</button>
+      
+      <div class="border-b border-blue-900/50 pb-3">
+        <h3 class="text-lg font-black text-white flex items-center gap-2">
+          <span>🎟️</span> Complete Your Reservation
+        </h3>
+        <p class="text-xs text-slate-400">ManaTollywood Secure Cinema Desk</p>
+      </div>
+
+      <!-- Authenticated Customer Banner -->
+      <div class="p-3 rounded-xl bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-between text-xs">
+        <div>
+          <span class="text-[10px] text-slate-400 uppercase tracking-wider block">Logged In Customer</span>
+          <span class="font-bold text-white text-sm" id="checkout-auth-name">Mahesh Varma</span>
+          <span class="text-[10px] text-cyan-300 block" id="checkout-auth-tier">Gold VIP • 250 Points</span>
+        </div>
+        <span class="px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-400 border border-emerald-500/40 text-[10px] font-bold">
+          ✓ Verified
+        </span>
+      </div>
+
+      <div class="space-y-3 text-xs">
+        <div>
+          <label class="block text-slate-300 font-medium mb-1">Customer Full Name *</label>
+          <input type="text" id="cust-name" readonly class="w-full bg-slate-900/70 border border-blue-950 text-slate-300 rounded-xl px-3 py-2 outline-none cursor-not-allowed">
+        </div>
+        <div>
+          <label class="block text-slate-300 font-medium mb-1">Mobile Number (For WhatsApp E-Ticket) *</label>
+          <input type="tel" id="cust-phone" readonly class="w-full bg-slate-900/70 border border-blue-950 text-slate-300 rounded-xl px-3 py-2 outline-none cursor-not-allowed">
+        </div>
+        <div>
+          <label class="block text-slate-300 font-medium mb-1">Email ID (For E-Ticket Invoice)</label>
+          <input type="email" id="cust-email" readonly class="w-full bg-slate-900/70 border border-blue-950 text-slate-300 rounded-xl px-3 py-2 outline-none cursor-not-allowed">
+        </div>
+
+        <!-- Billing Summary Card -->
+        <div class="bg-black/60 border border-blue-900/50 rounded-xl p-3.5 space-y-1.5 text-slate-300">
+          <div class="flex justify-between"><span>Movie & Audi:</span> <strong class="text-white" id="modal-bill-movie">-</strong></div>
+          <div class="flex justify-between"><span>Theater & Area:</span> <strong class="text-cyan-300" id="modal-bill-area">-</strong></div>
+          <div class="flex justify-between"><span>Selected Seats:</span> <strong class="text-cyan-300" id="modal-bill-seats">-</strong></div>
+          <div class="flex justify-between"><span>Ticket Base Fare:</span> <span id="modal-bill-base">₹0</span></div>
+          <div class="flex justify-between"><span>GST (18% Cinema Tax):</span> <span id="modal-bill-gst">₹0</span></div>
+          <div class="flex justify-between"><span>Convenience Portal Fee:</span> <span>₹30.00</span></div>
+          <div class="border-t border-blue-900/60 pt-1.5 flex justify-between font-bold text-sm text-white">
+            <span>Total Payable:</span>
+            <span class="text-cyan-400" id="modal-bill-total">₹0</span>
+          </div>
+        </div>
+      </div>
+
+      <button onclick="confirmBookingPayment()" class="w-full py-3 bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-slate-950 font-black rounded-xl text-xs uppercase tracking-wider shadow-lg shadow-cyan-500/25 transition">
+        Pay & Generate Official E-Ticket ⚡
+      </button>
+    </div>
+  </div>
+
+  <!-- ========================================================================= -->
+  <!-- 4. OFFICIAL CINEMA HALL E-TICKET MODAL                                     -->
+  <!-- ========================================================================= -->
+  <div id="modal-ticket" class="fixed inset-0 z-50 bg-black/90 backdrop-blur-md hidden flex items-center justify-center p-4">
+    <div class="bg-gradient-to-b from-slate-950 via-[#030712] to-black border-2 border-cyan-400/80 rounded-3xl max-w-lg w-full p-6 shadow-2xl relative space-y-5 text-center">
+      <button onclick="closeModal('modal-ticket')" class="absolute top-4 right-4 text-slate-400 hover:text-white text-lg">✕</button>
+
+      <div class="space-y-1">
+        <div class="inline-block p-2 rounded-full bg-cyan-500/20 text-cyan-400 border border-cyan-500/40 text-xl mb-1">
+          ✓
+        </div>
+        <h3 class="text-2xl font-black text-white tracking-wide">Mee Ticket Confirm Ayindi! 🎉</h3>
+        <p class="text-xs text-cyan-300 font-medium">Official Tollywood Admission Pass Generated</p>
+      </div>
+
+      <!-- Ticket Pass Body -->
+      <div class="bg-gradient-to-br from-slate-900 via-slate-950 to-blue-950/60 border border-cyan-500/40 rounded-2xl p-5 text-left space-y-3.5 relative overflow-hidden shadow-inner">
+        <div class="flex justify-between items-start border-b border-blue-900/50 pb-3">
+          <div class="flex items-center gap-3">
+            <div class="w-12 h-16 rounded-lg overflow-hidden border border-blue-900 shadow flex-shrink-0 bg-black">
+              <img id="ticket-poster-img" src="" alt="Ticket Poster" class="w-full h-full object-cover">
+            </div>
+            <div>
+              <span class="text-[10px] text-cyan-400 font-bold uppercase tracking-wider">ManaTollywood Pass</span>
+              <h4 class="text-lg font-black text-white" id="ticket-movie-title">Pushpa 2: The Rule</h4>
+              <p class="text-xs text-slate-300" id="ticket-theater-audi">Prasads Multiplex • Screen 6</p>
+              <p class="text-[11px] text-cyan-300 font-semibold" id="ticket-area-tag">📍 Necklace Road, Hyderabad</p>
+            </div>
+          </div>
+          <div class="text-right">
+            <span class="text-[10px] text-slate-400 uppercase">Booking Ref</span>
+            <div class="text-xs font-mono font-bold text-cyan-300 bg-cyan-500/10 px-2 py-0.5 rounded border border-cyan-500/30" id="ticket-ref-code">
+              TOL-2026-X83F
+            </div>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-2 sm:grid-cols-3 gap-2.5 text-xs">
+          <div>
+            <span class="text-slate-400 text-[10px] block">CITY & AREA</span>
+            <span class="font-bold text-white" id="ticket-city">Hyderabad</span>
+          </div>
+          <div>
+            <span class="text-slate-400 text-[10px] block">SHOW TIME</span>
+            <span class="font-bold text-white" id="ticket-time">10:30 AM</span>
+          </div>
+          <div>
+            <span class="text-slate-400 text-[10px] block">SEATS RESERVED</span>
+            <span class="font-bold text-cyan-400" id="ticket-seats">C1, C2</span>
+          </div>
+          <div>
+            <span class="text-slate-400 text-[10px] block">PATRON NAME</span>
+            <span class="font-medium text-white" id="ticket-patron">Mahesh Varma</span>
+          </div>
+          <div>
+            <span class="text-slate-400 text-[10px] block">MOBILE</span>
+            <span class="font-medium text-white" id="ticket-phone">+91-9849012345</span>
+          </div>
+          <div>
+            <span class="text-slate-400 text-[10px] block">TOTAL PAID</span>
+            <span class="font-bold text-emerald-400" id="ticket-amount">₹726.20</span>
+          </div>
+        </div>
+
+        <!-- Barcode / QR Simulation -->
+        <div class="border-t border-dashed border-blue-900/60 pt-3 flex items-center justify-between">
+          <div class="space-y-0.5">
+            <div class="text-[9px] text-slate-500 font-mono">||| | |||| | ||||| ||| |||| | |||| |||</div>
+            <div class="text-[9px] text-slate-400">SCAN AT TURNSTILE GATE • ENTRY PERMITTED</div>
+          </div>
+          <div class="text-xs px-2.5 py-1 rounded bg-cyan-500/10 text-cyan-400 border border-cyan-500/30 font-bold">
+            CONFIRMED
+          </div>
+        </div>
+      </div>
+
+      <div class="flex gap-2">
+        <button onclick="window.print()" class="flex-1 py-2.5 bg-slate-900 hover:bg-slate-800 text-white font-medium rounded-xl text-xs transition border border-blue-900">
+          🖨️ Print Ticket / Save PDF
+        </button>
+        <button onclick="closeModal('modal-ticket'); resetToHome();" class="flex-1 py-2.5 bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold rounded-xl text-xs transition shadow-lg shadow-cyan-500/20">
+          Book Another Movie →
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================================= -->
+  <!-- 5. BOX OFFICE ANALYTICS MODAL                                              -->
+  <!-- ========================================================================= -->
+  <div id="modal-analytics" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-sm hidden flex items-center justify-center p-4">
+    <div class="bg-slate-950 border border-cyan-500/40 rounded-3xl max-w-2xl w-full p-6 shadow-2xl relative space-y-5">
+      <button onclick="closeModal('modal-analytics')" class="absolute top-4 right-4 text-slate-400 hover:text-white text-lg">✕</button>
+
+      <div>
+        <h3 class="text-lg font-black text-white flex items-center gap-2">
+          <span>📊</span> Live Telugu Box Office & SQL Analytics
+        </h3>
+        <p class="text-xs text-slate-400">Powered by analytical SQL queries from `analytical_queries.sql`</p>
+      </div>
+
+      <div class="space-y-4 max-h-[70vh] overflow-y-auto custom-scroll pr-1">
+        <div class="bg-slate-900/90 border border-blue-900/60 rounded-2xl p-4">
+          <h4 class="text-xs font-bold text-cyan-400 uppercase tracking-wider mb-3">Top Grossing Movies Leaderboard</h4>
+          <div class="space-y-2.5 text-xs" id="analytics-leaderboard">
+            <!-- Rendered by JS -->
+          </div>
+        </div>
+
+        <div class="bg-slate-900/90 border border-blue-900/60 rounded-2xl p-4">
+          <h4 class="text-xs font-bold text-cyan-400 uppercase tracking-wider mb-3">Theater Collections by Area & Hub</h4>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs" id="analytics-theaters">
+            <!-- Rendered by JS -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Search Ticket Modal -->
+  <div id="modal-search" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-sm hidden flex items-center justify-center p-4">
+    <div class="bg-slate-950 border border-cyan-500/40 rounded-3xl max-w-md w-full p-6 shadow-2xl relative space-y-4">
+      <button onclick="closeModal('modal-search')" class="absolute top-4 right-4 text-slate-400 hover:text-white text-lg">✕</button>
+
+      <div>
+        <h3 class="text-lg font-black text-white flex items-center gap-2">
+          <span>🔍</span> Find Your Movie Ticket
+        </h3>
+        <p class="text-xs text-slate-400">Enter your Booking Reference (e.g. TOL-2024-P001 or TOL-2026-NET5640)</p>
+      </div>
+
+      <div class="flex gap-2">
+        <input type="text" id="input-search-ref" placeholder="TOL-..." class="flex-1 bg-slate-900 border border-blue-900 focus:border-cyan-400 rounded-xl px-3 py-2 text-white text-xs outline-none uppercase font-mono">
+        <button onclick="searchTicketByRef()" class="px-4 py-2 bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold text-xs rounded-xl transition shadow">
+          Search
+        </button>
+      </div>
+
+      <div id="search-result-container" class="text-xs text-slate-400 pt-2"></div>
+    </div>
+  </div>
+
+  <!-- Footer (Cinema Hall Theme) -->
+  <footer class="border-t border-blue-950 bg-black/70 py-8 px-4 text-center text-xs text-slate-500 space-y-2 relative z-10 backdrop-blur-md">
+    <p>ManaTollywood Cinema Network • Built with SQL, Python Engine & Basic .NET Core</p>
+    <p class="text-[11px] text-slate-600">
+      Celebrating Telugu Cinema in Gachibowli, RTC X Roads, Necklace Road, Kukatpally, Jagadamba Junction & MG Road • 🍿 Dolby Atmos Sound & 4K Laser Projection
+    </p>
+  </footer>
+
+  <!-- Application Logic JavaScript -->
+  <script>
+    // 100% Matched Official Theatrical Posters (Action, Romance, Drama, Sports & Adventure)
+    const APP_DATA = {
+      customers: [
+        {
+          id: 1,
+          name: "Mahesh Varma",
+          email: "mahesh.varma@example.com",
+          phone: "+91-9849012345",
+          password: "pass123",
+          city: "Hyderabad",
+          area: "Gachibowli",
+          points: 250,
+          tier: "Gold VIP",
+          totalBookings: 4,
+          totalSpend: "₹3,450.00",
+          lastLogin: "Just now"
+        },
+        {
+          id: 2,
+          name: "Sravani Reddy",
+          email: "sravani.reddy@example.com",
+          phone: "+91-9849112233",
+          password: "telugu2026",
+          city: "Visakhapatnam",
+          area: "Jagadamba Junction",
+          points: 450,
+          tier: "Platinum Cinephile",
+          totalBookings: 6,
+          totalSpend: "₹4,890.00",
+          lastLogin: "2 hours ago"
+        },
+        {
+          id: 3,
+          name: "Kalyan Ram",
+          email: "kalyan.ram@example.com",
+          phone: "+91-9849223344",
+          password: "kalyan123",
+          city: "Vijayawada",
+          area: "MG Road",
+          points: 120,
+          tier: "Silver Patron",
+          totalBookings: 2,
+          totalSpend: "₹1,240.00",
+          lastLogin: "1 day ago"
+        },
+        {
+          id: 4,
+          name: "Prashanth Reddy",
+          email: "prashanth.reddy@example.com",
+          phone: "9849012345",
+          password: "prashanth123",
+          city: "Hyderabad",
+          area: "Necklace Road",
+          points: 300,
+          tier: "Gold VIP",
+          totalBookings: 3,
+          totalSpend: "₹2,690.00",
+          lastLogin: "3 hours ago"
+        },
+        {
+          id: 5,
+          name: "Tollywood Admin",
+          email: "admin@manatollywood.com",
+          phone: "+91-9999900000",
+          password: "admin2026",
+          city: "Hyderabad",
+          area: "RTC X Roads",
+          points: 1500,
+          tier: "Master Admin",
+          totalBookings: 12,
+          totalSpend: "₹9,800.00",
+          lastLogin: "Online"
+        }
+      ],
+      movies: [
+        {
+          id: 1,
+          title: "Pushpa 2: The Rule",
+          actor: "Allu Arjun, Rashmika Mandanna",
+          director: "Sukumar",
+          music: "Devi Sri Prasad",
+          genre: "Action / Crime",
+          rating: 8.9,
+          duration: "3h 15m",
+          cert: "U/A",
+          year: 2024,
+          emoji: "🪓",
+          posterUrl: "https://upload.wikimedia.org/wikipedia/en/1/11/Pushpa_2-_The_Rule.jpg",
+          fallbackColor: "from-blue-950 to-black",
+          dialogue: "Jhukega nahi saala! Fire kadhu, Pushparaj wildfire!"
+        },
+        {
+          id: 2,
+          title: "Kalki 2898 AD",
+          actor: "Prabhas, Amitabh Bachchan, Kamal Haasan",
+          director: "Nag Ashwin",
+          music: "Santhosh Narayanan",
+          genre: "Sci-Fi / Mythological",
+          rating: 8.7,
+          duration: "3h 01m",
+          cert: "U/A",
+          year: 2024,
+          emoji: "🏹",
+          posterUrl: "https://upload.wikimedia.org/wikipedia/en/4/4c/Kalki_2898_AD.jpg",
+          fallbackColor: "from-blue-900 to-black",
+          dialogue: "The Supreme Yaskin era begins. Kasi turns to destiny."
+        },
+        {
+          id: 3,
+          title: "RRR",
+          actor: "Jr NTR, Ram Charan",
+          director: "S.S. Rajamouli",
+          music: "M.M. Keeravani",
+          genre: "Period Action Epic",
+          rating: 9.2,
+          duration: "3h 07m",
+          cert: "U/A",
+          year: 2022,
+          emoji: "🐅",
+          posterUrl: "https://upload.wikimedia.org/wikipedia/en/d/d7/RRR_Poster.jpg",
+          fallbackColor: "from-indigo-950 to-black",
+          dialogue: "Naatu Naatu Oscar Glory! Fire and water collide."
+        },
+        {
+          id: 4,
+          title: "Devara: Part 1",
+          actor: "Jr NTR, Janhvi Kapoor, Saif Ali Khan",
+          director: "Koratala Siva",
+          music: "Anirudh Ravichander",
+          genre: "Action / Drama",
+          rating: 8.1,
+          duration: "2h 58m",
+          cert: "U/A",
+          year: 2024,
+          emoji: "🌊",
+          posterUrl: "https://upload.wikimedia.org/wikipedia/en/f/f0/Devara_Part_1.jpg",
+          fallbackColor: "from-sky-950 to-black",
+          dialogue: "All hail the Tiger! Blood in the red sea."
+        },
+        {
+          id: 5,
+          title: "Salaar: Part 1 – Ceasefire",
+          actor: "Prabhas, Prithviraj Sukumaran",
+          director: "Prashanth Neel",
+          music: "Ravi Basrur",
+          genre: "Action / Thriller",
+          rating: 8.4,
+          duration: "2h 55m",
+          cert: "A",
+          year: 2023,
+          emoji: "⚔️",
+          posterUrl: "https://upload.wikimedia.org/wikipedia/en/a/a6/Salaar_Part_1_%E2%80%93_Ceasefire.jpg",
+          fallbackColor: "from-slate-900 to-black",
+          dialogue: "Please I Request... Khansaar will witness violence!"
+        },
+        {
+          id: 6,
+          title: "Hanu-Man",
+          actor: "Teja Sajja, Amritha Aiyer",
+          director: "Prasanth Varma",
+          music: "Anudeep Dev",
+          genre: "Superhero / Fantasy",
+          rating: 8.6,
+          duration: "2h 38m",
+          cert: "U/A",
+          year: 2024,
+          emoji: "🐒",
+          posterUrl: "https://upload.wikimedia.org/wikipedia/en/b/bb/Hanu_Man_film_Release_poster.jpeg",
+          fallbackColor: "from-blue-900 to-black",
+          dialogue: "Anjanadri hero with divine solar energy!"
+        },
+        {
+          id: 7,
+          title: "Guntur Kaaram",
+          actor: "Mahesh Babu, Sreeleela",
+          director: "Trivikram Srinivas",
+          music: "Thaman S",
+          genre: "Family / Action Drama",
+          rating: 7.8,
+          duration: "2h 42m",
+          cert: "U/A",
+          year: 2024,
+          emoji: "🌶️",
+          posterUrl: "https://upload.wikimedia.org/wikipedia/en/3/3e/Guntur_Kaaram_film_poster.jpg",
+          fallbackColor: "from-blue-950 to-black",
+          dialogue: "Kurchi Madathapetti style in the heart of Guntur!"
+        },
+        {
+          id: 8,
+          title: "Baahubali 2: The Conclusion",
+          actor: "Prabhas, Anushka Shetty, Rana Daggubati",
+          director: "S.S. Rajamouli",
+          music: "M.M. Keeravani",
+          genre: "Epic Fantasy / Drama",
+          rating: 9.1,
+          duration: "2h 47m",
+          cert: "U/A",
+          year: 2017,
+          emoji: "👑",
+          posterUrl: "https://upload.wikimedia.org/wikipedia/en/9/93/Baahubali_2_The_Conclusion_poster.jpg",
+          fallbackColor: "from-indigo-950 to-black",
+          dialogue: "Why did Kattappa kill Baahubali? Mahishmati royalty."
+        },
+        {
+          id: 9,
+          title: "Sita Ramam",
+          actor: "Dulquer Salmaan, Mrunal Thakur, Rashmika Mandanna",
+          director: "Hanu Raghavapudi",
+          music: "Vishal Chandrashekhar",
+          genre: "Romance / Period Drama",
+          rating: 8.6,
+          duration: "2h 43m",
+          cert: "U",
+          year: 2022,
+          emoji: "💌",
+          posterUrl: "https://upload.wikimedia.org/wikipedia/en/1/1d/Sita_Ramam.jpg",
+          fallbackColor: "from-pink-950 to-black",
+          dialogue: "O Sita... Katha modhalaindi prema tho!"
+        },
+        {
+          id: 10,
+          title: "Hi Nanna",
+          actor: "Nani, Mrunal Thakur, Baby Kiara",
+          director: "Shouryuv",
+          music: "Hesham Abdul Wahab",
+          genre: "Family Drama / Romance",
+          rating: 8.2,
+          duration: "2h 35m",
+          cert: "U",
+          year: 2023,
+          emoji: "❤️",
+          posterUrl: "https://upload.wikimedia.org/wikipedia/en/d/d7/Hi_Nanna_poster.jpg",
+          fallbackColor: "from-rose-950 to-black",
+          dialogue: "Samayam karigi pothundi... Nanna pranam nuvve!"
+        },
+        {
+          id: 11,
+          title: "Geetha Govindam",
+          actor: "Vijay Deverakonda, Rashmika Mandanna",
+          director: "Parasuram",
+          music: "Gopi Sundar",
+          genre: "Romantic Comedy / Drama",
+          rating: 7.7,
+          duration: "2h 22m",
+          cert: "U/A",
+          year: 2018,
+          emoji: "💐",
+          posterUrl: "https://upload.wikimedia.org/wikipedia/en/4/46/Geetha_Govindam.jpg",
+          fallbackColor: "from-amber-950 to-black",
+          dialogue: "Inkem Inkem Inkem Kaavaale! Govindam gari style!"
+        },
+        {
+          id: 12,
+          title: "Jersey",
+          actor: "Nani, Shraddha Srinath",
+          director: "Gowtam Tinnanuri",
+          music: "Anirudh Ravichander",
+          genre: "Sports Drama / Emotional Romance",
+          rating: 8.5,
+          duration: "2h 37m",
+          cert: "U",
+          year: 2019,
+          emoji: "🏏",
+          posterUrl: "https://upload.wikimedia.org/wikipedia/en/1/10/Jersey_2019_poster.jpg",
+          fallbackColor: "from-blue-950 to-black",
+          dialogue: "Late ga vachina latest ga kadhu, legend la vachadu!"
+        },
+        {
+          id: 13,
+          title: "Baby",
+          actor: "Anand Deverakonda, Vaishnavi Chaitanya",
+          director: "Sai Rajesh",
+          music: "Vijay Bulganin",
+          genre: "Youth Romance / Emotional Drama",
+          rating: 7.6,
+          duration: "2h 51m",
+          cert: "A",
+          year: 2023,
+          emoji: "💔",
+          posterUrl: "https://upload.wikimedia.org/wikipedia/en/4/46/Baby_theatrical_poster.jpg",
+          fallbackColor: "from-purple-950 to-black",
+          dialogue: "Premante idi kadhu... Heartbreak and redemption!"
+        },
+        {
+          id: 14,
+          title: "Bommarillu",
+          actor: "Siddharth, Genelia D'Souza, Prakash Raj",
+          director: "Bhaskar",
+          music: "Devi Sri Prasad",
+          genre: "Family Drama / Romance",
+          rating: 8.3,
+          duration: "2h 44m",
+          cert: "U",
+          year: 2006,
+          emoji: "🏡",
+          posterUrl: "https://upload.wikimedia.org/wikipedia/en/a/aa/Bommarillu_poster.jpg",
+          fallbackColor: "from-indigo-950 to-black",
+          dialogue: "Ha-ha-hasini! Nannu nannuga undanivvandi nanna!"
+        },
+        {
+          id: 15,
+          title: "Karthikeya 2",
+          actor: "Nikhil Siddharth, Anupama Parameswaran",
+          director: "Chandoo Mondeti",
+          music: "Kaala Bhairava",
+          genre: "Adventure / Mythological Mystery",
+          rating: 8.0,
+          duration: "2h 30m",
+          cert: "U/A",
+          year: 2022,
+          emoji: "🔱",
+          posterUrl: "https://upload.wikimedia.org/wikipedia/en/7/7e/Karthikeya_2_Poster.jpeg",
+          fallbackColor: "from-amber-950 to-black",
+          dialogue: "Dwaraka rahasyam... Saahasame shwasaga! Lord Krishna's anklet quest."
+        },
+        {
+          id: 16,
+          title: "Sye",
+          actor: "Nithiin, Genelia D'Souza, Pradeep Rawat",
+          director: "S.S. Rajamouli",
+          music: "M.M. Keeravani",
+          genre: "Sports Action / Rugby College Drama",
+          rating: 7.7,
+          duration: "2h 45m",
+          cert: "U/A",
+          year: 2004,
+          emoji: "🏉",
+          posterUrl: "https://upload.wikimedia.org/wikipedia/en/c/ca/Sye_2004_poster.jpg",
+          fallbackColor: "from-emerald-950 to-black",
+          dialogue: "Ee college ground maadi... Bhikshu Yadav tho Rugby yuddham!"
+        },
+        {
+          id: 17,
+          title: "Sahasam",
+          actor: "Gopichand, Taapsee Pannu, Shakti Kapoor",
+          director: "Chandrasekhar Yeleti",
+          music: "Sri",
+          genre: "Action Adventure / Treasure Hunt",
+          rating: 7.4,
+          duration: "2h 28m",
+          cert: "U/A",
+          year: 2013,
+          emoji: "🗺️",
+          posterUrl: "https://upload.wikimedia.org/wikipedia/en/2/2b/Sahasam_poster.jpg",
+          fallbackColor: "from-yellow-950 to-black",
+          dialogue: "Gautham Varma... Hinglaj guhalalo chithagani nidhula veta!"
+        },
+        {
+          id: 18,
+          title: "Golconda High School",
+          actor: "Sumanth, Swati Reddy, Subbaraju",
+          director: "Mohan Krishna Indraganti",
+          music: "Kalyani Malik",
+          genre: "Sports Drama / Cricket Inspiration",
+          rating: 7.8,
+          duration: "2h 20m",
+          cert: "U",
+          year: 2011,
+          emoji: "🏏",
+          posterUrl: "https://upload.wikimedia.org/wikipedia/en/c/c8/Golconda_High_School.jpg",
+          fallbackColor: "from-teal-950 to-black",
+          dialogue: "Play to win! Golconda ground kapadukundam cricket tho!"
+        }
+      ],
+      theaters: [
+        { id: 1, name: "Prasads Multiplex & Large Screen", city: "Hyderabad", area: "Necklace Road", tag: "Prasads PCX" },
+        { id: 2, name: "AMB Cinemas (Superplex)", city: "Hyderabad", area: "Gachibowli", tag: "AMB Laser IMAX" },
+        { id: 3, name: "Sudarshan 35MM Theatre", city: "Hyderabad", area: "RTC X Roads", tag: "Mass Hub 70MM" },
+        { id: 4, name: "PVR Forum Sujana Mall", city: "Hyderabad", area: "Kukatpally", tag: "PVR 4DX" },
+        { id: 5, name: "Jagadamba 70MM Theatre", city: "Visakhapatnam", area: "Jagadamba Junction", tag: "Vizag Landmark 70MM" },
+        { id: 6, name: "PVR Ripples Mall", city: "Vijayawada", area: "MG Road", tag: "Bezawada Cine Multiplex" }
+      ],
+      shows: [
+        // Pushpa 2
+        { id: 1, movieId: 1, theaterId: 1, theaterName: "Prasads Multiplex", screen: "Screen 6 (PCX Giant Screen)", city: "Hyderabad", area: "Necklace Road", time: "10:30 AM", silver: 180, gold: 295, platinum: 450, booked: ["C3", "C4"] },
+        { id: 2, movieId: 1, theaterId: 1, theaterName: "Prasads Multiplex", screen: "Screen 6 (PCX Giant Screen)", city: "Hyderabad", area: "Necklace Road", time: "02:30 PM", silver: 180, gold: 295, platinum: 450, booked: [] },
+        { id: 3, movieId: 1, theaterId: 1, theaterName: "Prasads Multiplex", screen: "Screen 6 (PCX Giant Screen)", city: "Hyderabad", area: "Necklace Road", time: "06:30 PM", silver: 200, gold: 350, platinum: 500, booked: ["E3", "E4"] },
+        { id: 4, movieId: 1, theaterId: 2, theaterName: "AMB Cinemas (Superplex)", screen: "Screen 1 (Laser IMAX)", city: "Hyderabad", area: "Gachibowli", time: "11:15 AM", silver: 250, gold: 380, platinum: 550, booked: [] },
+        { id: 5, movieId: 1, theaterId: 3, theaterName: "Sudarshan 35MM", screen: "Main Hall (Mass Experience)", city: "Hyderabad", area: "RTC X Roads", time: "06:00 PM", silver: 120, gold: 180, platinum: 250, booked: ["D1", "D2"] },
+        
+        // Kalki 2898 AD
+        { id: 6, movieId: 2, theaterId: 2, theaterName: "AMB Cinemas (Superplex)", screen: "Screen 1 (Laser IMAX)", city: "Hyderabad", area: "Gachibowli", time: "11:00 AM", silver: 250, gold: 380, platinum: 550, booked: [] },
+        { id: 7, movieId: 2, theaterId: 2, theaterName: "AMB Cinemas (Superplex)", screen: "Screen 1 (Laser IMAX)", city: "Hyderabad", area: "Gachibowli", time: "07:30 PM", silver: 280, gold: 420, platinum: 600, booked: ["E1", "E2"] },
+        { id: 8, movieId: 2, theaterId: 1, theaterName: "Prasads Multiplex", screen: "Screen 3 (Gold Class)", city: "Hyderabad", area: "Necklace Road", time: "01:30 PM", silver: 190, gold: 310, platinum: 480, booked: [] },
+        
+        // RRR
+        { id: 9, movieId: 3, theaterId: 3, theaterName: "Sudarshan 35MM", screen: "Main Hall (Mass Experience)", city: "Hyderabad", area: "RTC X Roads", time: "11:30 AM", silver: 120, gold: 180, platinum: 250, booked: ["C1", "C2"] },
+        { id: 10, movieId: 3, theaterId: 1, theaterName: "Prasads Multiplex", screen: "Screen 6 (PCX Giant)", city: "Hyderabad", area: "Necklace Road", time: "08:15 PM", silver: 200, gold: 350, platinum: 500, booked: [] },
+        
+        // Devara: Part 1
+        { id: 11, movieId: 4, theaterId: 5, theaterName: "Jagadamba 70MM Theatre", screen: "Jagadamba Main Audi", city: "Visakhapatnam", area: "Jagadamba Junction", time: "06:45 PM", silver: 160, gold: 250, platinum: 350, booked: ["C3", "C4"] },
+        { id: 12, movieId: 4, theaterId: 2, theaterName: "AMB Cinemas (Superplex)", screen: "Screen 4 (VIP Audi)", city: "Hyderabad", area: "Gachibowli", time: "09:15 PM", silver: 260, gold: 390, platinum: 560, booked: [] },
+        
+        // Salaar
+        { id: 13, movieId: 5, theaterId: 4, theaterName: "PVR Forum Sujana Mall", screen: "Audi 2 (4DX)", city: "Hyderabad", area: "Kukatpally", time: "04:00 PM", silver: 300, gold: 450, platinum: 600, booked: [] },
+        
+        // Hanu-Man
+        { id: 14, movieId: 6, theaterId: 6, theaterName: "PVR Ripples Mall", screen: "Audi 1", city: "Vijayawada", area: "MG Road", time: "06:15 PM", silver: 140, gold: 200, platinum: 280, booked: [] },
+        
+        // Guntur Kaaram
+        { id: 15, movieId: 7, theaterId: 2, theaterName: "AMB Cinemas (Superplex)", screen: "Screen 1 (Laser IMAX)", city: "Hyderabad", area: "Gachibowli", time: "02:00 PM", silver: 250, gold: 380, platinum: 550, booked: [] },
+        
+        // Baahubali 2
+        { id: 16, movieId: 8, theaterId: 1, theaterName: "Prasads Multiplex", screen: "Screen 6 (PCX Giant)", city: "Hyderabad", area: "Necklace Road", time: "03:45 PM", silver: 180, gold: 295, platinum: 450, booked: [] },
+        
+        // Sita Ramam (Romance / Period Drama)
+        { id: 17, movieId: 9, theaterId: 1, theaterName: "Prasads Multiplex", screen: "Screen 3 (Gold Class)", city: "Hyderabad", area: "Necklace Road", time: "04:15 PM", silver: 190, gold: 310, platinum: 460, booked: [] },
+        { id: 18, movieId: 9, theaterId: 2, theaterName: "AMB Cinemas (Superplex)", screen: "Screen 4 (VIP Audi)", city: "Hyderabad", area: "Gachibowli", time: "08:00 PM", silver: 240, gold: 360, platinum: 520, booked: [] },
+        
+        // Hi Nanna (Family Drama / Romance)
+        { id: 19, movieId: 10, theaterId: 2, theaterName: "AMB Cinemas (Superplex)", screen: "Screen 4 (VIP Audi)", city: "Hyderabad", area: "Gachibowli", time: "01:45 PM", silver: 240, gold: 360, platinum: 520, booked: [] },
+        { id: 20, movieId: 10, theaterId: 6, theaterName: "PVR Ripples Mall", screen: "Audi 1", city: "Vijayawada", area: "MG Road", time: "06:30 PM", silver: 140, gold: 210, platinum: 290, booked: [] },
+        
+        // Geetha Govindam (Romantic Comedy)
+        { id: 21, movieId: 11, theaterId: 3, theaterName: "Sudarshan 35MM", screen: "Main Hall", city: "Hyderabad", area: "RTC X Roads", time: "02:45 PM", silver: 120, gold: 180, platinum: 250, booked: [] },
+        
+        // Jersey (Sports Drama)
+        { id: 22, movieId: 12, theaterId: 3, theaterName: "Sudarshan 35MM", screen: "Main Hall", city: "Hyderabad", area: "RTC X Roads", time: "06:15 PM", silver: 120, gold: 180, platinum: 250, booked: [] },
+        { id: 23, movieId: 12, theaterId: 5, theaterName: "Jagadamba 70MM Theatre", screen: "Jagadamba Main Audi", city: "Visakhapatnam", area: "Jagadamba Junction", time: "02:30 PM", silver: 150, gold: 220, platinum: 300, booked: [] },
+
+        // Baby (Youth Romance / Drama)
+        { id: 24, movieId: 13, theaterId: 4, theaterName: "PVR Forum Sujana Mall", screen: "Audi 2", city: "Hyderabad", area: "Kukatpally", time: "07:30 PM", silver: 260, gold: 390, platinum: 550, booked: [] },
+
+        // Bommarillu (Family Drama / Romance)
+        { id: 25, movieId: 14, theaterId: 1, theaterName: "Prasads Multiplex", screen: "Screen 3 (Gold Class)", city: "Hyderabad", area: "Necklace Road", time: "11:15 AM", silver: 180, gold: 280, platinum: 400, booked: [] },
+
+        // Karthikeya 2 (Adventure / Mystery)
+        { id: 26, movieId: 15, theaterId: 2, theaterName: "AMB Cinemas (Superplex)", screen: "Screen 1 (Laser IMAX)", city: "Hyderabad", area: "Gachibowli", time: "03:15 PM", silver: 240, gold: 360, platinum: 520, booked: [] },
+        { id: 27, movieId: 15, theaterId: 5, theaterName: "Jagadamba 70MM Theatre", screen: "Jagadamba Main Audi", city: "Visakhapatnam", area: "Jagadamba Junction", time: "06:30 PM", silver: 160, gold: 250, platinum: 350, booked: [] },
+
+        // Sye (Sports / Rugby Action)
+        { id: 28, movieId: 16, theaterId: 3, theaterName: "Sudarshan 35MM", screen: "Main Hall (Mass Experience)", city: "Hyderabad", area: "RTC X Roads", time: "02:15 PM", silver: 120, gold: 180, platinum: 250, booked: [] },
+        { id: 29, movieId: 16, theaterId: 1, theaterName: "Prasads Multiplex", screen: "Screen 6 (PCX Giant)", city: "Hyderabad", area: "Necklace Road", time: "09:45 PM", silver: 180, gold: 295, platinum: 450, booked: [] },
+
+        // Sahasam (Treasure Hunt Adventure)
+        { id: 30, movieId: 17, theaterId: 4, theaterName: "PVR Forum Sujana Mall", screen: "Audi 2 (4DX)", city: "Hyderabad", area: "Kukatpally", time: "04:30 PM", silver: 260, gold: 380, platinum: 540, booked: [] },
+        { id: 31, movieId: 17, theaterId: 2, theaterName: "AMB Cinemas (Superplex)", screen: "Screen 4 (VIP Audi)", city: "Hyderabad", area: "Gachibowli", time: "07:15 PM", silver: 240, gold: 360, platinum: 500, booked: [] },
+
+        // Golconda High School (Cricket Sports Drama)
+        { id: 32, movieId: 18, theaterId: 6, theaterName: "PVR Ripples Mall", screen: "Audi 1", city: "Vijayawada", area: "MG Road", time: "01:15 PM", silver: 140, gold: 200, platinum: 280, booked: [] },
+        { id: 33, movieId: 18, theaterId: 1, theaterName: "Prasads Multiplex", screen: "Screen 3 (Gold Class)", city: "Hyderabad", area: "Necklace Road", time: "05:30 PM", silver: 190, gold: 300, platinum: 440, booked: [] }
+      ],
+      userBookings: [
+        {
+          ref: "TOL-2024-P001",
+          movie: "Pushpa 2: The Rule",
+          posterUrl: "https://upload.wikimedia.org/wikipedia/en/1/11/Pushpa_2-_The_Rule.jpg",
+          theater: "Prasads Multiplex",
+          screen: "Screen 6 (PCX)",
+          city: "Hyderabad",
+          area: "Necklace Road",
+          time: "06:30 PM",
+          seats: ["E3", "E4"],
+          customer: "Prashanth Reddy",
+          phone: "9849012345",
+          total: "₹1,210.00"
+        }
+      ]
+    };
+
+    // City & Area Metadata for Filter Chips
+    const AREA_CATALOG = {
+      "All": [
+        { key: "All", label: "All Areas (Everywhere)" },
+        { key: "Gachibowli", label: "📍 Gachibowli", city: "Hyderabad", note: "AMB Cinemas" },
+        { key: "RTC X Roads", label: "📍 RTC X Roads", city: "Hyderabad", note: "Sudarshan 35MM" },
+        { key: "Necklace Road", label: "📍 Necklace Road", city: "Hyderabad", note: "Prasads PCX" },
+        { key: "Kukatpally", label: "📍 Kukatpally", city: "Hyderabad", note: "PVR Forum" },
+        { key: "Jagadamba Junction", label: "📍 Jagadamba Junction", city: "Visakhapatnam", note: "Jagadamba 70MM" },
+        { key: "MG Road", label: "📍 MG Road", city: "Vijayawada", note: "PVR Ripples" }
+      ],
+      "Hyderabad": [
+        { key: "All", label: "All Areas in Hyderabad" },
+        { key: "Gachibowli", label: "📍 Gachibowli", city: "Hyderabad", note: "AMB Cinemas" },
+        { key: "RTC X Roads", label: "📍 RTC X Roads", city: "Hyderabad", note: "Sudarshan 35MM" },
+        { key: "Necklace Road", label: "📍 Necklace Road", city: "Hyderabad", note: "Prasads PCX" },
+        { key: "Kukatpally", label: "📍 Kukatpally", city: "Hyderabad", note: "PVR Forum" }
+      ],
+      "Visakhapatnam": [
+        { key: "All", label: "All Vizag Areas" },
+        { key: "Jagadamba Junction", label: "📍 Jagadamba Junction", city: "Visakhapatnam", note: "Jagadamba 70MM" }
+      ],
+      "Vijayawada": [
+        { key: "All", label: "All Vijayawada Areas" },
+        { key: "MG Road", label: "📍 MG Road", city: "Vijayawada", note: "PVR Ripples" }
+      ]
+    };
+
+    // App State
+    let currentCityFilter = "All";
+    let currentAreaFilter = "All";
+    let currentGenreFilter = "All";
+    let currentKeywordSearch = "";
+    let selectedMovie = null;
+    let selectedShow = null;
+    let selectedSeats = new Set();
+    let currentShowAreaFilter = "All";
+
+    // Authentication State (E-Commerce Customer Account)
+    let currentCustomer = null;
+    let authPendingAction = null; // Will resume checkout if user clicked proceed while logged out
+
+    document.addEventListener("DOMContentLoaded", () => {
+      // Check saved session or auto-login with Mahesh Varma as demo convenience
+      const savedUser = localStorage.getItem("manaTollywoodUser");
+      if (savedUser) {
+        try {
+          currentCustomer = JSON.parse(savedUser);
+        } catch(e) {}
+      }
+      if (!currentCustomer) {
+        // Default to Mahesh Varma for seamless preview
+        currentCustomer = APP_DATA.customers[0];
+      }
+
+      renderAuthNav();
+      renderAreaFilterPills();
+      renderMoviesGrid();
+    });
+
+    // =========================================================================
+    // CUSTOMER AUTHENTICATION METHODS
+    // =========================================================================
+
+    function renderAuthNav() {
+      const container = document.getElementById("nav-auth-container");
+      const heroStatus = document.getElementById("hero-auth-status-text");
+      const heroBtn = document.getElementById("hero-auth-btn");
+
+      if (currentCustomer) {
+        container.innerHTML = `
+          <div class="flex items-center gap-2 bg-slate-900/90 border border-cyan-500/30 rounded-xl px-2.5 py-1 text-xs">
+            <div class="w-6 h-6 rounded-full bg-cyan-400 text-slate-950 font-black flex items-center justify-center text-[11px]">
+              ${currentCustomer.name.charAt(0)}
+            </div>
+            <div class="hidden sm:block text-left leading-tight">
+              <span class="font-bold text-white block truncate max-w-[110px]">${currentCustomer.name}</span>
+              <span class="text-[9px] text-cyan-300">${currentCustomer.tier} • ${currentCustomer.points} pts</span>
+            </div>
+            <button onclick="logoutCustomer()" title="Sign Out" class="text-slate-400 hover:text-red-400 text-xs px-1 font-bold">
+              ✕
+            </button>
+          </div>
+        `;
+
+        if (heroStatus) {
+          heroStatus.innerHTML = `Welcome back, <strong class="text-white">${currentCustomer.name}</strong> (${currentCustomer.tier})! You have <strong class="text-cyan-400">${currentCustomer.points} Loyalty Coins</strong> available for ticket discounts.`;
+        }
+        if (heroBtn) {
+          heroBtn.innerText = "Switch Account";
+          heroBtn.onclick = () => openLoginModal();
+        }
+      } else {
+        container.innerHTML = `
+          <button onclick="openLoginModal()" class="flex items-center gap-1.5 text-xs bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-slate-950 font-black px-3 py-2 rounded-xl shadow-md shadow-cyan-500/25 transition">
+            <span>🔑</span>
+            <span>Sign In</span>
+          </button>
+        `;
+
+        if (heroStatus) {
+          heroStatus.innerText = "Log in to unlock instant seat reservations, loyalty reward coins, and official E-Tickets.";
+        }
+        if (heroBtn) {
+          heroBtn.innerText = "Sign In Now";
+          heroBtn.onclick = () => openLoginModal();
+        }
+      }
+    }
+
+    function openLoginModal(action = null) {
+      authPendingAction = action;
+      document.getElementById("login-error-msg").classList.add("hidden");
+      document.getElementById("register-error-msg").classList.add("hidden");
+      setAuthTab("login");
+      document.getElementById("modal-auth").classList.remove("hidden");
+    }
+
+    function setAuthTab(tab) {
+      const tabLogin = document.getElementById("tab-auth-login");
+      const tabRegister = document.getElementById("tab-auth-register");
+      const formLogin = document.getElementById("form-login");
+      const formRegister = document.getElementById("form-register");
+      const title = document.getElementById("auth-modal-title");
+
+      if (tab === "login") {
+        tabLogin.className = "py-2 rounded-lg bg-cyan-500 text-slate-950 transition font-bold";
+        tabRegister.className = "py-2 rounded-lg text-slate-400 hover:text-white transition font-bold";
+        formLogin.classList.remove("hidden");
+        formRegister.classList.add("hidden");
+        title.innerText = "Sign In to Reserve Your Ticket";
+      } else {
+        tabRegister.className = "py-2 rounded-lg bg-cyan-500 text-slate-950 transition font-bold";
+        tabLogin.className = "py-2 rounded-lg text-slate-400 hover:text-white transition font-bold";
+        formRegister.classList.remove("hidden");
+        formLogin.classList.add("hidden");
+        title.innerText = "Create Free Cinema Account";
+      }
+    }
+
+    function fillQuickLogin(email, password) {
+      document.getElementById("login-email").value = email;
+      document.getElementById("login-password").value = password;
+      handleLoginSubmit(new Event("submit"));
+    }
+
+    function handleLoginSubmit(e) {
+      e.preventDefault();
+      const email = document.getElementById("login-email").value.trim().toLowerCase();
+      const password = document.getElementById("login-password").value.trim();
+      const errorEl = document.getElementById("login-error-msg");
+
+      const match = APP_DATA.customers.find(c => c.email.toLowerCase() === email && c.password === password);
+      if (!match) {
+        errorEl.innerText = "[-] Invalid email or password. Please check your credentials.";
+        errorEl.classList.remove("hidden");
+        return;
+      }
+
+      // Success
+      match.lastLogin = "Just now";
+      currentCustomer = match;
+      localStorage.setItem("manaTollywoodUser", JSON.stringify(currentCustomer));
+      closeModal("modal-auth");
+      renderAuthNav();
+
+      // If booking was pending, open checkout confirmation immediately!
+      if (authPendingAction && authPendingAction.returnToCheckout) {
+        authPendingAction = null;
+        openCheckoutModal();
+      }
+    }
+
+    function handleRegisterSubmit(e) {
+      e.preventDefault();
+      const name = document.getElementById("reg-name").value.trim();
+      const email = document.getElementById("reg-email").value.trim().toLowerCase();
+      const phone = document.getElementById("reg-phone").value.trim();
+      const city = document.getElementById("reg-city").value;
+      const password = document.getElementById("reg-password").value.trim();
+      const errorEl = document.getElementById("register-error-msg");
+
+      if (APP_DATA.customers.some(c => c.email.toLowerCase() === email)) {
+        errorEl.innerText = "[-] An account with this email already exists. Please Sign In.";
+        errorEl.classList.remove("hidden");
+        return;
+      }
+
+      const newCustomer = {
+        id: APP_DATA.customers.length + 1,
+        name: name,
+        email: email,
+        phone: phone.startsWith("+91") ? phone : `+91-${phone}`,
+        password: password,
+        city: city,
+        area: "Main Hub",
+        points: 150,
+        tier: "Silver Patron",
+        totalBookings: 0,
+        totalSpend: "₹0.00",
+        lastLogin: "Just now"
+      };
+
+      APP_DATA.customers.unshift(newCustomer);
+      currentCustomer = newCustomer;
+      localStorage.setItem("manaTollywoodUser", JSON.stringify(currentCustomer));
+      closeModal("modal-auth");
+      renderAuthNav();
+
+      if (authPendingAction && authPendingAction.returnToCheckout) {
+        authPendingAction = null;
+        openCheckoutModal();
+      }
+    }
+
+    function logoutCustomer() {
+      currentCustomer = null;
+      localStorage.removeItem("manaTollywoodUser");
+      renderAuthNav();
+    }
+
+    // =========================================================================
+    // BACKEND CUSTOMER LOGIN AUDIT (CAN SEE IN BACKEND)
+    // =========================================================================
+
+    function openCustomerBackendModal() {
+      refreshCustomerBackendList();
+      document.getElementById("modal-customers-backend").classList.remove("hidden");
+    }
+
+    function refreshCustomerBackendList() {
+      const tbody = document.getElementById("customers-backend-tbody");
+      tbody.innerHTML = "";
+
+      APP_DATA.customers.forEach(c => {
+        const isCurrent = currentCustomer && currentCustomer.id === c.id;
+        const tr = document.createElement("tr");
+        tr.className = isCurrent ? "bg-cyan-500/10 font-semibold" : "hover:bg-slate-900/60";
+
+        tr.innerHTML = `
+          <td class="p-3 font-mono text-cyan-400">#${c.id}</td>
+          <td class="p-3">
+            <div class="font-bold text-white flex items-center gap-1.5">
+              <span>${c.name}</span>
+              ${isCurrent ? '<span class="text-[9px] bg-cyan-400 text-black px-1.5 py-0.2 rounded font-bold">CURRENT</span>' : ''}
+            </div>
+            <div class="text-[10px] text-slate-400">${c.totalBookings} tickets booked • Total ${c.totalSpend}</div>
+          </td>
+          <td class="p-3 font-mono text-xs">
+            <div class="text-cyan-300">${c.email}</div>
+            <div class="text-slate-400 text-[11px]">${c.phone}</div>
+          </td>
+          <td class="p-3">
+            <span class="text-slate-300 font-medium">${c.city}</span>
+            <span class="text-[10px] text-cyan-400 block font-mono">📍 ${c.area}</span>
+          </td>
+          <td class="p-3">
+            <span class="px-2 py-0.5 rounded text-[10px] font-bold ${c.tier.includes('VIP') || c.tier.includes('Platinum') ? 'bg-amber-500/20 text-amber-300 border border-amber-500/30' : 'bg-blue-950 text-cyan-300'}">
+              ${c.tier}
+            </span>
+            <span class="text-[10px] text-slate-400 block mt-0.5">${c.points} Loyalty Coins</span>
+          </td>
+          <td class="p-3 font-mono text-[11px] text-slate-400">
+            <code>${c.password}</code>
+          </td>
+          <td class="p-3 text-[11px] text-slate-400 font-mono">
+            ${c.lastLogin}
+          </td>
+          <td class="p-3 text-right">
+            <button onclick="loginAsCustomer(${c.id})" class="px-2.5 py-1 bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold rounded-lg text-[10px] transition shadow">
+              Login as User
+            </button>
+          </td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    function loginAsCustomer(customerId) {
+      const match = APP_DATA.customers.find(c => c.id === customerId);
+      if (match) {
+        match.lastLogin = "Just now";
+        currentCustomer = match;
+        localStorage.setItem("manaTollywoodUser", JSON.stringify(currentCustomer));
+        renderAuthNav();
+        closeModal("modal-customers-backend");
+      }
+    }
+
+    // =========================================================================
+    // STRICT BOOKING GATE (AFTER LOGIN ONLY TICKET CAN BE BOOKED)
+    // =========================================================================
+
+    function handleProceedToConfirmation() {
+      const seatsArr = Array.from(selectedSeats);
+      if (seatsArr.length === 0) return;
+
+      // Gate: Check if user is logged in
+      if (!currentCustomer) {
+        openLoginModal({ returnToCheckout: true });
+        return;
+      }
+
+      // If user is logged in, proceed to confirmation modal
+      openCheckoutModal();
+    }
+
+    function openCheckoutModal() {
+      const seatsArr = Array.from(selectedSeats);
+      if (seatsArr.length === 0) return;
+
+      let subtotal = 0;
+      seatsArr.forEach(code => {
+        const row = code.charAt(0);
+        let price = selectedShow.silver;
+        if (row === "C" || row === "D") price = selectedShow.gold;
+        if (row === "E") price = selectedShow.platinum;
+        subtotal += price;
+      });
+
+      const gst = Math.round(subtotal * 0.18 * 100) / 100;
+      const total = subtotal + gst + 30.00;
+
+      // Populate Customer Info from Authenticated Profile
+      document.getElementById("checkout-auth-name").innerText = currentCustomer.name;
+      document.getElementById("checkout-auth-tier").innerText = `${currentCustomer.tier} • ${currentCustomer.points} Loyalty Points Available`;
+      document.getElementById("cust-name").value = currentCustomer.name;
+      document.getElementById("cust-phone").value = currentCustomer.phone;
+      document.getElementById("cust-email").value = currentCustomer.email;
+
+      document.getElementById("modal-bill-movie").innerText = `${selectedMovie.title} (${selectedShow.screen})`;
+      document.getElementById("modal-bill-area").innerText = `${selectedShow.theaterName} • 📍 ${selectedShow.area}, ${selectedShow.city}`;
+      document.getElementById("modal-bill-seats").innerText = seatsArr.join(", ");
+      document.getElementById("modal-bill-base").innerText = `₹${subtotal.toFixed(2)}`;
+      document.getElementById("modal-bill-gst").innerText = `₹${gst.toFixed(2)}`;
+      document.getElementById("modal-bill-total").innerText = `₹${total.toFixed(2)}`;
+
+      document.getElementById("modal-checkout").classList.remove("hidden");
+    }
+
+    function confirmBookingPayment() {
+      if (!currentCustomer) {
+        closeModal("modal-checkout");
+        openLoginModal({ returnToCheckout: true });
+        return;
+      }
+
+      const seatsArr = Array.from(selectedSeats);
+      let subtotal = 0;
+      seatsArr.forEach(code => {
+        const row = code.charAt(0);
+        let price = selectedShow.silver;
+        if (row === "C" || row === "D") price = selectedShow.gold;
+        if (row === "E") price = selectedShow.platinum;
+        subtotal += price;
+      });
+      const gst = Math.round(subtotal * 0.18 * 100) / 100;
+      const total = subtotal + gst + 30.00;
+
+      const randomSuffix = Math.random().toString(36).substring(2, 6).toUpperCase();
+      const bookingRef = `TOL-2026-${randomSuffix}`;
+
+      seatsArr.forEach(s => selectedShow.booked.push(s));
+
+      const newBooking = {
+        ref: bookingRef,
+        movie: selectedMovie.title,
+        posterUrl: selectedMovie.posterUrl,
+        theater: selectedShow.theaterName,
+        screen: selectedShow.screen,
+        city: selectedShow.city,
+        area: selectedShow.area,
+        time: selectedShow.time,
+        seats: seatsArr,
+        customer: currentCustomer.name,
+        phone: currentCustomer.phone,
+        total: `₹${total.toFixed(2)}`
+      };
+      APP_DATA.userBookings.unshift(newBooking);
+
+      // Award Loyalty Coins to Logged-in Customer
+      currentCustomer.points += (seatsArr.length * 25);
+      currentCustomer.totalBookings += 1;
+      localStorage.setItem("manaTollywoodUser", JSON.stringify(currentCustomer));
+      renderAuthNav();
+
+      closeModal("modal-checkout");
+
+      document.getElementById("ticket-poster-img").src = newBooking.posterUrl;
+      document.getElementById("ticket-movie-title").innerText = newBooking.movie;
+      document.getElementById("ticket-theater-audi").innerText = `${newBooking.theater} • ${newBooking.screen}`;
+      document.getElementById("ticket-area-tag").innerText = `📍 ${newBooking.area}, ${newBooking.city}`;
+      document.getElementById("ticket-ref-code").innerText = newBooking.ref;
+      document.getElementById("ticket-city").innerText = `${newBooking.city} (${newBooking.area})`;
+      document.getElementById("ticket-time").innerText = newBooking.time;
+      document.getElementById("ticket-seats").innerText = newBooking.seats.join(", ");
+      document.getElementById("ticket-patron").innerText = newBooking.customer;
+      document.getElementById("ticket-phone").innerText = newBooking.phone;
+      document.getElementById("ticket-amount").innerText = newBooking.total;
+
+      document.getElementById("modal-ticket").classList.remove("hidden");
+    }
+
+    // =========================================================================
+    // AREA & GENRE FILTERING LOGIC
+    // =========================================================================
+
+    function renderAreaFilterPills() {
+      const container = document.getElementById("area-pills-container");
+      container.innerHTML = "";
+
+      const areas = AREA_CATALOG[currentCityFilter] || AREA_CATALOG["All"];
+
+      areas.forEach(a => {
+        const btn = document.createElement("button");
+        const isActive = currentAreaFilter.toLowerCase() === a.key.toLowerCase();
+
+        btn.className = isActive
+          ? "area-pill px-3 py-1.5 rounded-xl font-bold transition text-xs bg-cyan-500 text-slate-950 shadow-md shadow-cyan-500/25 flex items-center gap-1"
+          : "area-pill px-3 py-1.5 rounded-xl font-medium transition text-xs bg-slate-900/90 hover:bg-blue-950 text-slate-300 hover:text-white border border-blue-900/70 flex items-center gap-1";
+        
+        btn.innerHTML = `
+          <span>${a.label}</span>
+          ${a.note ? `<span class="opacity-60 text-[10px]">(${a.note})</span>` : ""}
+        `;
+        btn.onclick = () => setAreaFilter(a.key);
+        container.appendChild(btn);
+      });
+
+      const badge = document.getElementById("nav-active-location-badge");
+      if (badge) {
+        if (currentAreaFilter !== "All") {
+          badge.innerText = `• 📍 ${currentAreaFilter}`;
+        } else if (currentCityFilter !== "All") {
+          badge.innerText = `• 🏙️ ${currentCityFilter}`;
+        } else {
+          badge.innerText = `• All Areas`;
+        }
+      }
+    }
+
+    function setCityFilter(city) {
+      currentCityFilter = city;
+      currentAreaFilter = "All";
+
+      document.querySelectorAll(".city-btn").forEach(b => {
+        b.className = "city-btn px-3.5 py-1.5 rounded-lg font-medium transition text-slate-300 hover:text-white hover:bg-blue-950/50";
+      });
+      const activeBtn = document.getElementById("btn-city-" + city);
+      if (activeBtn) {
+        activeBtn.className = "city-btn px-3.5 py-1.5 rounded-lg font-semibold transition bg-cyan-500 text-slate-950 shadow-md shadow-cyan-500/25";
+      }
+
+      const selectEl = document.getElementById("select-city-dropdown");
+      if (selectEl) selectEl.value = city;
+
+      renderAreaFilterPills();
+      renderMoviesGrid();
+
+      if (selectedMovie) {
+        renderShowsForMovie(selectedMovie);
+      }
+    }
+
+    function setAreaFilter(area) {
+      currentAreaFilter = area;
+      renderAreaFilterPills();
+      renderMoviesGrid();
+
+      if (selectedMovie) {
+        currentShowAreaFilter = area;
+        renderShowsForMovie(selectedMovie);
+      }
+    }
+
+    function setGenreFilter(genre) {
+      currentGenreFilter = genre;
+      document.querySelectorAll(".genre-pill").forEach(p => {
+        p.className = "genre-pill px-3 py-1 rounded-xl bg-slate-900/90 hover:bg-blue-950 text-slate-300 border border-blue-900/60 transition text-xs";
+      });
+      const active = document.getElementById("genre-" + genre);
+      if (active) {
+        active.className = "genre-pill px-3 py-1 rounded-xl bg-cyan-500 text-slate-950 font-bold transition text-xs shadow-lg shadow-cyan-500/25";
+      }
+      renderMoviesGrid();
+    }
+
+    function handleKeywordSearch(query) {
+      currentKeywordSearch = query.trim().toLowerCase();
+      renderMoviesGrid();
+    }
+
+    function resetFilters() {
+      currentCityFilter = "All";
+      currentAreaFilter = "All";
+      currentGenreFilter = "All";
+      currentKeywordSearch = "";
+      document.getElementById("input-keyword-search").value = "";
+      document.getElementById("select-city-dropdown").value = "All";
+      setGenreFilter("All");
+      setCityFilter("All");
+    }
+
+    function getMovieAreas(movieId) {
+      const shows = APP_DATA.shows.filter(s => s.movieId === movieId);
+      const areas = new Set(shows.map(s => s.area));
+      return Array.from(areas);
+    }
+
+    function getMovieCities(movieId) {
+      const shows = APP_DATA.shows.filter(s => s.movieId === movieId);
+      const cities = new Set(shows.map(s => s.city));
+      return Array.from(cities);
+    }
+
+    function renderMoviesGrid() {
+      const container = document.getElementById("movies-grid");
+      container.innerHTML = "";
+
+      let filtered = APP_DATA.movies.filter(m => {
+        // Genre Filter
+        if (currentGenreFilter !== "All") {
+          const g = m.genre.toLowerCase();
+          const target = currentGenreFilter.toLowerCase();
+          if (target === "sports" && !g.includes("sport") && !g.includes("cricket") && !g.includes("rugby")) {
+            return false;
+          } else if (target === "adventure" && !g.includes("adventure") && !g.includes("hunt") && !g.includes("mytholog")) {
+            return false;
+          } else if (target === "romance" && !g.includes("romance") && !g.includes("romantic")) {
+            return false;
+          } else if (target === "drama" && !g.includes("drama")) {
+            return false;
+          } else if (target !== "sports" && target !== "adventure" && target !== "romance" && target !== "drama" && !g.includes(target)) {
+            return false;
+          }
+        }
+
+        // City Filter
+        const movieCities = getMovieCities(m.id);
+        if (currentCityFilter !== "All" && !movieCities.some(c => c.toLowerCase() === currentCityFilter.toLowerCase())) {
+          return false;
+        }
+
+        // Area Filter
+        const movieAreas = getMovieAreas(m.id);
+        if (currentAreaFilter !== "All" && !movieAreas.some(a => a.toLowerCase() === currentAreaFilter.toLowerCase())) {
+          return false;
+        }
+
+        // Keyword Search
+        if (currentKeywordSearch) {
+          const matchTitle = m.title.toLowerCase().includes(currentKeywordSearch);
+          const matchActor = m.actor.toLowerCase().includes(currentKeywordSearch);
+          const matchDirector = m.director.toLowerCase().includes(currentKeywordSearch);
+          const matchGenre = m.genre.toLowerCase().includes(currentKeywordSearch);
+          const matchArea = movieAreas.some(a => a.toLowerCase().includes(currentKeywordSearch));
+          const matchTheaters = APP_DATA.shows.filter(s => s.movieId === m.id).some(s => s.theaterName.toLowerCase().includes(currentKeywordSearch));
+          if (!matchTitle && !matchActor && !matchDirector && !matchGenre && !matchArea && !matchTheaters) {
+            return false;
+          }
+        }
+
+        return true;
+      });
+
+      // Update Header Description & Badges
+      const countBadge = document.getElementById("movies-count-badge");
+      countBadge.innerText = `${filtered.length} Movie${filtered.length === 1 ? '' : 's'}`;
+
+      const genreCount = document.getElementById("genre-badge-count");
+      if (genreCount) {
+        genreCount.innerText = `Showing ${filtered.length} Title${filtered.length === 1 ? '' : 's'}`;
+      }
+
+      const descEl = document.getElementById("filter-status-desc");
+      let filterDetails = [];
+      if (currentCityFilter !== "All") filterDetails.push(`City: ${currentCityFilter}`);
+      if (currentAreaFilter !== "All") filterDetails.push(`Area: 📍 ${currentAreaFilter}`);
+      if (currentGenreFilter !== "All") filterDetails.push(`Genre: ${currentGenreFilter}`);
+      if (currentKeywordSearch) filterDetails.push(`Search: "${currentKeywordSearch}"`);
+
+      if (filterDetails.length > 0) {
+        descEl.innerHTML = `Active Filters: <span class="text-cyan-400 font-semibold">${filterDetails.join(" • ")}</span> (${filtered.length} titles listed)`;
+      } else {
+        descEl.innerText = "Showing movies across all cities & theater areas. Select a film to view theater screens and reserve seats.";
+      }
+
+      if (filtered.length === 0) {
+        container.innerHTML = `
+          <div class="col-span-full py-16 text-center space-y-4 bg-slate-950/70 border border-blue-900/40 rounded-3xl p-8 backdrop-blur-md">
+            <span class="text-4xl">🍿</span>
+            <h4 class="text-lg font-bold text-white">No Movies Match Your Current Filter</h4>
+            <p class="text-xs text-slate-400 max-w-md mx-auto">
+              There are no screenings currently listed for <strong>${currentGenreFilter !== 'All' ? currentGenreFilter : (currentAreaFilter !== 'All' ? currentAreaFilter : currentCityFilter)}</strong>.
+            </p>
+            <button onclick="resetFilters()" class="px-4 py-2 bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold text-xs rounded-xl transition shadow">
+              Reset All Filters
+            </button>
+          </div>
+        `;
+        return;
+      }
+
+      filtered.forEach(m => {
+        const movieAreas = getMovieAreas(m.id);
+        const card = document.createElement("div");
+        card.className = "bg-slate-950/90 border border-blue-900/60 hover:border-cyan-400 rounded-3xl overflow-hidden flex flex-col justify-between transition-all duration-300 hover:-translate-y-1.5 hover:shadow-2xl hover:shadow-cyan-500/20 group cursor-pointer cinema-card-glow backdrop-blur-md";
+        card.onclick = () => selectMovie(m.id);
+
+        let genreBadgeColor = "text-cyan-400";
+        if (m.genre.toLowerCase().includes("sport")) genreBadgeColor = "text-emerald-400";
+        else if (m.genre.toLowerCase().includes("adventure") || m.genre.toLowerCase().includes("hunt")) genreBadgeColor = "text-amber-400";
+        else if (m.genre.toLowerCase().includes("romance")) genreBadgeColor = "text-pink-400";
+        else if (m.genre.toLowerCase().includes("drama")) genreBadgeColor = "text-orange-400";
+
+        card.innerHTML = `
+          <div>
+            <!-- Poster Image Container -->
+            <div class="h-80 w-full relative overflow-hidden bg-black">
+              <img src="${m.posterUrl}" 
+                   alt="${m.title} Poster" 
+                   class="w-full h-full object-cover object-top group-hover:scale-105 transition duration-500"
+                   onerror="this.onerror=null; this.parentElement.innerHTML='<div class=\\'w-full h-full bg-gradient-to-br ${m.fallbackColor} flex flex-col items-center justify-center p-4 text-center\\'><span class=\\'text-5xl mb-2\\'>${m.emoji}</span><span class=\\'font-black text-white text-lg\\'>${m.title}</span></div>';">
+              
+              <!-- Dark Cinema Blue Overlay -->
+              <div class="absolute inset-0 bg-gradient-to-t from-[#030712] via-transparent to-black/30"></div>
+
+              <!-- Rating Badge -->
+              <div class="absolute top-3 right-3 px-2.5 py-1 rounded-full text-xs font-black bg-black/80 backdrop-blur-md text-cyan-300 border border-cyan-500/40 flex items-center gap-1 shadow-lg">
+                <span>⭐</span> ${m.rating}
+              </div>
+
+              <!-- Certificate Tag -->
+              <div class="absolute top-3 left-3 px-2 py-0.5 rounded text-[10px] font-bold bg-[#030712]/90 backdrop-blur-sm text-slate-300 border border-blue-900/80 uppercase">
+                ${m.cert} • ${m.duration}
+              </div>
+
+              <!-- Bottom Title Overlay -->
+              <div class="absolute bottom-3 left-3 right-3">
+                <span class="text-[10px] font-bold ${genreBadgeColor} uppercase tracking-widest">${m.genre}</span>
+                <h3 class="text-lg font-black text-white leading-tight drop-shadow group-hover:text-cyan-300 transition">${m.title}</h3>
+              </div>
+            </div>
+
+            <!-- Movie Details & Playing Areas -->
+            <div class="p-4 space-y-2.5">
+              <p class="text-xs font-bold text-slate-200 truncate">${m.actor}</p>
+              
+              <!-- Screen Hubs / Areas Tags -->
+              <div class="space-y-1">
+                <span class="text-[10px] text-slate-400 uppercase tracking-wider block font-semibold">Playing in Areas:</span>
+                <div class="flex flex-wrap gap-1">
+                  ${movieAreas.slice(0, 3).map(a => `
+                    <span class="px-2 py-0.5 rounded-md text-[10px] font-medium bg-blue-950/80 text-cyan-300 border border-blue-900/70">
+                      📍 ${a}
+                    </span>
+                  `).join("")}
+                  ${movieAreas.length > 3 ? `<span class="px-1.5 py-0.5 text-[10px] text-slate-400">+${movieAreas.length - 3} more</span>` : ''}
+                </div>
+              </div>
+
+              <p class="text-[11px] text-cyan-300/80 italic line-clamp-1 pt-1">"${m.dialogue}"</p>
+            </div>
+          </div>
+
+          <!-- Cinema Hall Book Button -->
+          <div class="p-4 pt-0">
+            <button class="w-full py-2.5 rounded-xl bg-blue-950/70 border border-blue-900/80 group-hover:bg-gradient-to-r group-hover:from-cyan-500 group-hover:to-blue-600 group-hover:text-slate-950 text-slate-200 font-bold text-xs transition duration-300 flex items-center justify-center gap-1.5 shadow">
+              <span>View Shows & Pick Seats</span>
+              <span class="group-hover:translate-x-1 transition duration-300">→</span>
+            </button>
+          </div>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    function selectMovie(movieId) {
+      selectedMovie = APP_DATA.movies.find(m => m.id === movieId);
+      if (!selectedMovie) return;
+
+      document.getElementById("selected-movie-poster-img").src = selectedMovie.posterUrl;
+      document.getElementById("selected-movie-title").innerText = selectedMovie.title;
+      document.getElementById("selected-movie-cert").innerText = selectedMovie.cert;
+      document.getElementById("selected-movie-actors").innerText = `${selectedMovie.actor} • Directed by ${selectedMovie.director} • Music by ${selectedMovie.music}`;
+      document.getElementById("selected-movie-dialogue").innerText = `"${selectedMovie.dialogue}"`;
+
+      currentShowAreaFilter = currentAreaFilter !== "All" ? currentAreaFilter : "All";
+      renderShowsForMovie(selectedMovie);
+
+      const sectionShows = document.getElementById("section-shows");
+      sectionShows.classList.remove("hidden");
+      sectionShows.scrollIntoView({ behavior: "smooth" });
+
+      document.getElementById("section-seating").classList.add("hidden");
+    }
+
+    function renderShowsForMovie(movie) {
+      const container = document.getElementById("shows-list");
+      container.innerHTML = "";
+
+      let allMovieShows = APP_DATA.shows.filter(s => s.movieId === movie.id);
+      const movieAreas = Array.from(new Set(allMovieShows.map(s => s.area)));
+
+      const areaPillsContainer = document.getElementById("movie-show-area-pills");
+      areaPillsContainer.innerHTML = "";
+
+      const allBtn = document.createElement("button");
+      allBtn.className = currentShowAreaFilter === "All"
+        ? "px-3 py-1 rounded-lg text-xs font-bold bg-cyan-500 text-slate-950 shadow"
+        : "px-3 py-1 rounded-lg text-xs font-medium bg-slate-900 hover:bg-slate-800 text-slate-300 border border-blue-900";
+      allBtn.innerText = `All Areas (${allMovieShows.length} shows)`;
+      allBtn.onclick = () => {
+        currentShowAreaFilter = "All";
+        renderShowsForMovie(movie);
+      };
+      areaPillsContainer.appendChild(allBtn);
+
+      movieAreas.forEach(areaName => {
+        const areaShowsCount = allMovieShows.filter(s => s.area === areaName).length;
+        const btn = document.createElement("button");
+        btn.className = currentShowAreaFilter.toLowerCase() === areaName.toLowerCase()
+          ? "px-3 py-1 rounded-lg text-xs font-bold bg-cyan-500 text-slate-950 shadow"
+          : "px-3 py-1 rounded-lg text-xs font-medium bg-slate-900 hover:bg-slate-800 text-slate-300 border border-blue-900";
+        btn.innerHTML = `📍 ${areaName} <span class="opacity-60 text-[10px]">(${areaShowsCount})</span>`;
+        btn.onclick = () => {
+          currentShowAreaFilter = areaName;
+          renderShowsForMovie(movie);
+        };
+        areaPillsContainer.appendChild(btn);
+      });
+
+      let shows = allMovieShows;
+      if (currentCityFilter !== "All") {
+        shows = shows.filter(s => s.city.toLowerCase() === currentCityFilter.toLowerCase());
+      }
+      if (currentShowAreaFilter !== "All") {
+        shows = shows.filter(s => s.area.toLowerCase() === currentShowAreaFilter.toLowerCase());
+      }
+
+      document.getElementById("shows-count-badge").innerText = `${shows.length} Screening${shows.length === 1 ? '' : 's'}`;
+
+      if (shows.length === 0) {
+        container.innerHTML = `
+          <div class="col-span-full py-10 text-center text-slate-400 text-xs bg-slate-950/60 rounded-2xl p-6 border border-blue-950">
+            No shows scheduled in <strong>${currentShowAreaFilter !== 'All' ? currentShowAreaFilter : currentCityFilter}</strong> for "${movie.title}".
+            <div class="mt-2">
+              <button onclick="currentShowAreaFilter='All'; renderShowsForMovie(selectedMovie);" class="text-cyan-400 underline font-semibold">
+                View all areas for this movie
+              </button>
+            </div>
+          </div>
+        `;
+        return;
+      }
+
+      shows.forEach(s => {
+        const item = document.createElement("div");
+        item.className = "bg-slate-950 border border-blue-900/60 hover:border-cyan-400 rounded-2xl p-4 transition cursor-pointer group backdrop-blur-md";
+        item.onclick = () => selectShow(s);
+
+        const isChosen = selectedShow && selectedShow.id === s.id;
+        if (isChosen) {
+          item.className += " ring-2 ring-cyan-400 border-cyan-400 shadow-lg shadow-cyan-500/20";
+        }
+
+        item.innerHTML = `
+          <div class="flex items-start justify-between">
+            <div class="space-y-1">
+              <div class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-bold bg-cyan-500/10 text-cyan-300 border border-cyan-500/30">
+                <span>📍</span> ${s.area}, ${s.city}
+              </div>
+              <h5 class="text-sm font-bold text-white group-hover:text-cyan-300 transition pt-1">${s.theaterName}</h5>
+              <p class="text-xs text-slate-400">${s.screen}</p>
+            </div>
+            <span class="px-2.5 py-1 bg-cyan-500/10 text-cyan-400 border border-cyan-500/30 font-bold rounded-lg text-xs">
+              ${s.time}
+            </span>
+          </div>
+
+          <div class="pt-3 mt-3 border-t border-blue-950 flex items-center justify-between text-xs">
+            <div class="space-x-1.5 text-[11px] text-slate-400">
+              <span>Silver ₹${s.silver}</span>
+              <span>•</span>
+              <span>Gold ₹${s.gold}</span>
+              <span>•</span>
+              <span class="text-cyan-300 font-semibold">Plat ₹${s.platinum}</span>
+            </div>
+            <span class="text-cyan-400 font-bold text-[11px] group-hover:translate-x-1 transition">Pick Seats →</span>
+          </div>
+        `;
+        container.appendChild(item);
+      });
+    }
+
+    function selectShow(show) {
+      selectedShow = show;
+      selectedSeats.clear();
+      updateCheckoutSummary();
+
+      document.getElementById("seat-hall-info").innerText = `${show.theaterName} • ${show.screen} (📍 ${show.area}, ${show.city})`;
+      document.getElementById("seat-time-info").innerText = `Today • Showtime: ${show.time}`;
+
+      renderSeatingGrid(show);
+
+      const sectionSeating = document.getElementById("section-seating");
+      sectionSeating.classList.remove("hidden");
+      sectionSeating.scrollIntoView({ behavior: "smooth" });
+    }
+
+    function renderSeatingGrid(show) {
+      const container = document.getElementById("seats-container");
+      container.innerHTML = "";
+
+      const rows = [
+        { label: "A", tier: "Silver", price: show.silver },
+        { label: "B", tier: "Silver", price: show.silver },
+        { label: "C", tier: "Gold", price: show.gold },
+        { label: "D", tier: "Gold", price: show.gold },
+        { label: "E", tier: "Platinum VIP", price: show.platinum }
+      ];
+
+      rows.forEach(r => {
+        const rowDiv = document.createElement("div");
+        rowDiv.className = "flex items-center justify-between gap-2";
+
+        const labelDiv = document.createElement("div");
+        labelDiv.className = "w-28 text-left";
+        labelDiv.innerHTML = `
+          <div class="text-xs font-bold text-white">Row ${r.label}</div>
+          <div class="text-[10px] text-slate-400">${r.tier} <span class="text-cyan-400">₹${r.price}</span></div>
+        `;
+        rowDiv.appendChild(labelDiv);
+
+        const seatsGroup = document.createElement("div");
+        seatsGroup.className = "flex items-center gap-2";
+
+        for (let num = 1; num <= 6; num++) {
+          const seatCode = `${r.label}${num}`;
+          const isBooked = show.booked && show.booked.includes(seatCode);
+          const isSelected = selectedSeats.has(seatCode);
+
+          const seatBtn = document.createElement("button");
+          seatBtn.setAttribute("data-seat", seatCode);
+          seatBtn.setAttribute("data-price", r.price);
+
+          if (isBooked) {
+            seatBtn.disabled = true;
+            seatBtn.className = "w-8 h-8 rounded-lg bg-red-950/80 border border-red-900 text-red-500 font-bold text-xs flex items-center justify-center cursor-not-allowed";
+            seatBtn.innerHTML = "✕";
+          } else if (isSelected) {
+            seatBtn.className = "w-8 h-8 rounded-lg bg-cyan-400 text-slate-950 font-black text-xs flex items-center justify-center shadow-lg shadow-cyan-400/60 scale-105 transition";
+            seatBtn.innerHTML = seatCode;
+          } else {
+            seatBtn.className = "w-8 h-8 rounded-lg bg-slate-900 hover:bg-slate-800 border border-blue-900/70 text-slate-300 font-medium text-xs flex items-center justify-center transition";
+            seatBtn.innerHTML = seatCode;
+          }
+
+          seatBtn.onclick = () => toggleSeatSelection(seatCode, r.price);
+          seatsGroup.appendChild(seatBtn);
+        }
+
+        rowDiv.appendChild(seatsGroup);
+        container.appendChild(rowDiv);
+      });
+    }
+
+    function toggleSeatSelection(seatCode, price) {
+      if (selectedSeats.has(seatCode)) {
+        selectedSeats.delete(seatCode);
+      } else {
+        selectedSeats.add(seatCode);
+      }
+      renderSeatingGrid(selectedShow);
+      updateCheckoutSummary();
+    }
+
+    function updateCheckoutSummary() {
+      const seatsArr = Array.from(selectedSeats);
+      const seatsText = document.getElementById("summary-seats-text");
+      const baseFareEl = document.getElementById("summary-base-fare");
+      const gstEl = document.getElementById("summary-gst");
+      const feeEl = document.getElementById("summary-fee");
+      const totalEl = document.getElementById("summary-total-amount");
+      const btnProceed = document.getElementById("btn-proceed-checkout");
+      const btnText = document.getElementById("btn-proceed-text");
+
+      if (seatsArr.length === 0) {
+        seatsText.innerText = "None selected";
+        baseFareEl.innerText = "₹0.00";
+        gstEl.innerText = "₹0.00";
+        feeEl.innerText = "₹0.00";
+        totalEl.innerText = "₹0.00";
+        btnProceed.disabled = true;
+        return;
+      }
+
+      seatsText.innerText = seatsArr.join(", ");
+
+      let subtotal = 0;
+      seatsArr.forEach(code => {
+        const row = code.charAt(0);
+        let price = selectedShow.silver;
+        if (row === "C" || row === "D") price = selectedShow.gold;
+        if (row === "E") price = selectedShow.platinum;
+        subtotal += price;
+      });
+
+      const gst = Math.round(subtotal * 0.18 * 100) / 100;
+      const fee = 30.00;
+      const total = subtotal + gst + fee;
+
+      baseFareEl.innerText = `₹${subtotal.toFixed(2)}`;
+      gstEl.innerText = `₹${gst.toFixed(2)}`;
+      feeEl.innerText = `₹${fee.toFixed(2)}`;
+      totalEl.innerText = `₹${total.toFixed(2)}`;
+      btnProceed.disabled = false;
+
+      if (!currentCustomer) {
+        btnText.innerText = "Sign In & Proceed to Book";
+      } else {
+        btnText.innerText = "Proceed to Confirmation";
+      }
+    }
+
+    function openAnalyticsModal() {
+      const lb = document.getElementById("analytics-leaderboard");
+      lb.innerHTML = "";
+      const stats = [
+        { title: "Pushpa 2: The Rule", actor: "Allu Arjun", gross: "₹3,450.00", tickets: 8, badge: "⭐ MEGA BLOCKBUSTER" },
+        { title: "Sita Ramam", actor: "Dulquer & Mrunal", gross: "₹2,680.00", tickets: 6, badge: "❤️ ROMANCE CLASSIC" },
+        { title: "Kalki 2898 AD", actor: "Prabhas", gross: "₹2,154.00", tickets: 3, badge: "⚡ RECORD PACER" },
+        { title: "Karthikeya 2", actor: "Nikhil Siddharth", gross: "₹1,980.00", tickets: 5, badge: "🔱 ADVENTURE HIT" },
+        { title: "Sye", actor: "Nithiin & Rajamouli", gross: "₹1,890.00", tickets: 4, badge: "🏉 SPORTS BLOCKBUSTER" },
+        { title: "Hi Nanna", actor: "Nani & Mrunal", gross: "₹1,840.00", tickets: 4, badge: "👨‍👧 HEARTWARMING DRAMA" },
+        { title: "RRR", actor: "Jr NTR & Ram Charan", gross: "₹879.60", tickets: 4, badge: "🏆 OSCAR PRIDE" }
+      ];
+
+      stats.forEach(s => {
+        const row = document.createElement("div");
+        row.className = "flex items-center justify-between p-2.5 rounded-xl bg-slate-900 border border-blue-900/60";
+        row.innerHTML = `
+          <div>
+            <div class="font-bold text-white flex items-center gap-1.5">
+              <span>${s.title}</span>
+              <span class="text-[9px] text-cyan-400 px-1.5 py-0.2 rounded bg-cyan-500/10 border border-cyan-500/30">${s.badge}</span>
+            </div>
+            <div class="text-[11px] text-slate-400">${s.actor} • ${s.tickets} tickets reserved</div>
+          </div>
+          <div class="text-right">
+            <div class="font-mono font-bold text-cyan-300">${s.gross}</div>
+            <div class="text-[10px] text-slate-500">Gross Collections</div>
+          </div>
+        `;
+        lb.appendChild(row);
+      });
+
+      const th = document.getElementById("analytics-theaters");
+      th.innerHTML = "";
+      const theaters = [
+        { name: "Prasads Multiplex PCX", area: "Necklace Road", city: "Hyderabad", occ: "85% Occupancy", rev: "₹3,117" },
+        { name: "AMB Cinemas Superplex", area: "Gachibowli", city: "Hyderabad", occ: "82% Occupancy", rev: "₹2,850" },
+        { name: "Sudarshan 35MM", area: "RTC X Roads", city: "Hyderabad", occ: "95% Occupancy", rev: "₹2,480" },
+        { name: "Jagadamba 70MM", area: "Jagadamba Junction", city: "Visakhapatnam", occ: "90% Occupancy", rev: "₹1,850" },
+        { name: "PVR Ripples Mall", area: "MG Road", city: "Vijayawada", occ: "72% Occupancy", rev: "₹1,420" },
+        { name: "PVR Forum Sujana Mall", area: "Kukatpally", city: "Hyderabad", occ: "78% Occupancy", rev: "₹1,790" }
+      ];
+      theaters.forEach(t => {
+        const item = document.createElement("div");
+        item.className = "p-2.5 rounded-xl bg-slate-900 border border-blue-900/60 flex justify-between";
+        item.innerHTML = `
+          <div>
+            <div class="font-bold text-white">${t.name}</div>
+            <div class="text-[10px] text-slate-400">📍 ${t.area}, ${t.city} • <span class="text-cyan-400">${t.occ}</span></div>
+          </div>
+          <div class="text-cyan-300 font-mono font-semibold self-center">${t.rev}</div>
+        `;
+        th.appendChild(item);
+      });
+
+      document.getElementById("modal-analytics").classList.remove("hidden");
+    }
+
+    function openFindBookingModal() {
+      document.getElementById("input-search-ref").value = "";
+      document.getElementById("search-result-container").innerHTML = "";
+      document.getElementById("modal-search").classList.remove("hidden");
+    }
+
+    function searchTicketByRef() {
+      const code = document.getElementById("input-search-ref").value.trim().toUpperCase();
+      const resContainer = document.getElementById("search-result-container");
+      if (!code) {
+        resContainer.innerHTML = `<span class="text-cyan-400">Please enter a valid reference code.</span>`;
+        return;
+      }
+
+      const match = APP_DATA.userBookings.find(b => b.ref.toUpperCase() === code);
+      if (match) {
+        closeModal("modal-search");
+        document.getElementById("ticket-poster-img").src = match.posterUrl || "";
+        document.getElementById("ticket-movie-title").innerText = match.movie;
+        document.getElementById("ticket-theater-audi").innerText = `${match.theater} • ${match.screen}`;
+        document.getElementById("ticket-area-tag").innerText = `📍 ${match.area || 'Main Audi'}, ${match.city}`;
+        document.getElementById("ticket-ref-code").innerText = match.ref;
+        document.getElementById("ticket-city").innerText = `${match.city} (${match.area || ''})`;
+        document.getElementById("ticket-time").innerText = match.time;
+        document.getElementById("ticket-seats").innerText = match.seats.join(", ");
+        document.getElementById("ticket-patron").innerText = match.customer;
+        document.getElementById("ticket-phone").innerText = match.phone;
+        document.getElementById("ticket-amount").innerText = match.total;
+        document.getElementById("modal-ticket").classList.remove("hidden");
+      } else {
+        resContainer.innerHTML = `<span class="text-red-400">[-] No ticket found with reference "${code}". Try checking your confirmation SMS.</span>`;
+      }
+    }
+
+    function closeModal(id) {
+      document.getElementById(id).classList.add("hidden");
+    }
+
+    function scrollToMovies() {
+      document.getElementById("section-movies").scrollIntoView({ behavior: "smooth" });
+    }
+
+    function resetToHome() {
+      selectedMovie = null;
+      selectedShow = null;
+      selectedSeats.clear();
+      document.getElementById("section-shows").classList.add("hidden");
+      document.getElementById("section-seating").classList.add("hidden");
+      scrollToMovies();
+    }
+  </script>
+</body>
+</html>
